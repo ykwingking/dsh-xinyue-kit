@@ -1,0 +1,16 @@
+# 依赖与缓存
+node_modules/
+.cache/
+*.log
+
+# 本机/编辑器
+.env
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# 临时与备份
+*.bak
+*.orig
+/tmp/

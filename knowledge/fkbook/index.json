@@ -1,0 +1,3568 @@
+{
+  "$comment": "新月杀官方文档《新月之书》(for-creators)的分节索引。由 scripts/build-fkbook.mjs 生成,请勿手工编辑。",
+  "source": "新月之书 / fkbook-all-in-one(for-creators)",
+  "sourceRepo": "https://gitee.com/Qsgs-Fans/fkbook-all-in-one",
+  "sourceReadTheDocs": "https://fkbook-all-in-one.readthedocs.io/",
+  "scope": "for-creators",
+  "files": 72,
+  "bytes": 290253,
+  "sections": [
+    {
+      "id": "fkbook/anhe/00-prepare.rst#开发环境准备",
+      "file": "fkbook/anhe/00-prepare.rst",
+      "line": 3,
+      "endLine": 172,
+      "level": 1,
+      "title": "开发环境准备",
+      "path": [],
+      "chars": 3140
+    },
+    {
+      "id": "fkbook/anhe/00-prepare.rst#通过本教程，你可以做到…",
+      "file": "fkbook/anhe/00-prepare.rst",
+      "line": 6,
+      "endLine": 13,
+      "level": 2,
+      "title": "通过本教程，你可以做到…",
+      "path": [
+        "开发环境准备"
+      ],
+      "chars": 161
+    },
+    {
+      "id": "fkbook/anhe/00-prepare.rst#熟悉新月杀",
+      "file": "fkbook/anhe/00-prepare.rst",
+      "line": 13,
+      "endLine": 71,
+      "level": 2,
+      "title": "熟悉新月杀",
+      "path": [
+        "开发环境准备"
+      ],
+      "chars": 1217
+    },
+    {
+      "id": "fkbook/anhe/00-prepare.rst#packages/",
+      "file": "fkbook/anhe/00-prepare.rst",
+      "line": 25,
+      "endLine": 49,
+      "level": 3,
+      "title": "packages/",
+      "path": [
+        "开发环境准备",
+        "熟悉新月杀"
+      ],
+      "chars": 634
+    },
+    {
+      "id": "fkbook/anhe/00-prepare.rst#lua/",
+      "file": "fkbook/anhe/00-prepare.rst",
+      "line": 49,
+      "endLine": 71,
+      "level": 3,
+      "title": "lua/",
+      "path": [
+        "开发环境准备",
+        "熟悉新月杀"
+      ],
+      "chars": 430
+    },
+    {
+      "id": "fkbook/anhe/00-prepare.rst#准备代码编辑器",
+      "file": "fkbook/anhe/00-prepare.rst",
+      "line": 71,
+      "endLine": 112,
+      "level": 2,
+      "title": "准备代码编辑器",
+      "path": [
+        "开发环境准备"
+      ],
+      "chars": 573
+    },
+    {
+      "id": "fkbook/anhe/00-prepare.rst#在VSCode中部署工作区",
+      "file": "fkbook/anhe/00-prepare.rst",
+      "line": 112,
+      "endLine": 139,
+      "level": 2,
+      "title": "在VSCode中部署工作区",
+      "path": [
+        "开发环境准备"
+      ],
+      "chars": 502
+    },
+    {
+      "id": "fkbook/anhe/00-prepare.rst#用VSCode写东西",
+      "file": "fkbook/anhe/00-prepare.rst",
+      "line": 139,
+      "endLine": 172,
+      "level": 2,
+      "title": "用VSCode写东西",
+      "path": [
+        "开发环境准备"
+      ],
+      "chars": 655
+    },
+    {
+      "id": "fkbook/anhe/01-hello.rst#创建拓展包与新武将",
+      "file": "fkbook/anhe/01-hello.rst",
+      "line": 3,
+      "endLine": 366,
+      "level": 1,
+      "title": "创建拓展包与新武将",
+      "path": [],
+      "chars": 8230
+    },
+    {
+      "id": "fkbook/anhe/01-hello.rst#扩展包的内容",
+      "file": "fkbook/anhe/01-hello.rst",
+      "line": 6,
+      "endLine": 115,
+      "level": 2,
+      "title": "扩展包的内容",
+      "path": [
+        "创建拓展包与新武将"
+      ],
+      "chars": 2495
+    },
+    {
+      "id": "fkbook/anhe/01-hello.rst#init.lua",
+      "file": "fkbook/anhe/01-hello.rst",
+      "line": 17,
+      "endLine": 91,
+      "level": 3,
+      "title": "init.lua",
+      "path": [
+        "创建拓展包与新武将",
+        "扩展包的内容"
+      ],
+      "chars": 1981
+    },
+    {
+      "id": "fkbook/anhe/01-hello.rst#子扩展包",
+      "file": "fkbook/anhe/01-hello.rst",
+      "line": 91,
+      "endLine": 103,
+      "level": 3,
+      "title": "子扩展包",
+      "path": [
+        "创建拓展包与新武将",
+        "扩展包的内容"
+      ],
+      "chars": 187
+    },
+    {
+      "id": "fkbook/anhe/01-hello.rst#audio,-image",
+      "file": "fkbook/anhe/01-hello.rst",
+      "line": 103,
+      "endLine": 110,
+      "level": 3,
+      "title": "audio, image",
+      "path": [
+        "创建拓展包与新武将",
+        "扩展包的内容"
+      ],
+      "chars": 126
+    },
+    {
+      "id": "fkbook/anhe/01-hello.rst#其他文件",
+      "file": "fkbook/anhe/01-hello.rst",
+      "line": 110,
+      "endLine": 115,
+      "level": 3,
+      "title": "其他文件",
+      "path": [
+        "创建拓展包与新武将",
+        "扩展包的内容"
+      ],
+      "chars": 38
+    },
+    {
+      "id": "fkbook/anhe/01-hello.rst#创建拓展包",
+      "file": "fkbook/anhe/01-hello.rst",
+      "line": 115,
+      "endLine": 238,
+      "level": 2,
+      "title": "创建拓展包",
+      "path": [
+        "创建拓展包与新武将"
+      ],
+      "chars": 2474
+    },
+    {
+      "id": "fkbook/anhe/01-hello.rst#创建武将",
+      "file": "fkbook/anhe/01-hello.rst",
+      "line": 238,
+      "endLine": 366,
+      "level": 2,
+      "title": "创建武将",
+      "path": [
+        "创建拓展包与新武将"
+      ],
+      "chars": 3224
+    },
+    {
+      "id": "fkbook/anhe/02-addskill.rst#添加技能",
+      "file": "fkbook/anhe/02-addskill.rst",
+      "line": 1,
+      "endLine": 93,
+      "level": 1,
+      "title": "添加技能",
+      "path": [],
+      "chars": 1915
+    },
+    {
+      "id": "fkbook/anhe/03-makeimage.rst#武将美化",
+      "file": "fkbook/anhe/03-makeimage.rst",
+      "line": 1,
+      "endLine": 135,
+      "level": 1,
+      "title": "武将美化",
+      "path": [],
+      "chars": 2061
+    },
+    {
+      "id": "fkbook/anhe/03-makeimage.rst#软件准备",
+      "file": "fkbook/anhe/03-makeimage.rst",
+      "line": 9,
+      "endLine": 20,
+      "level": 2,
+      "title": "软件准备",
+      "path": [
+        "武将美化"
+      ],
+      "chars": 167
+    },
+    {
+      "id": "fkbook/anhe/03-makeimage.rst#图片准备",
+      "file": "fkbook/anhe/03-makeimage.rst",
+      "line": 20,
+      "endLine": 36,
+      "level": 2,
+      "title": "图片准备",
+      "path": [
+        "武将美化"
+      ],
+      "chars": 164
+    },
+    {
+      "id": "fkbook/anhe/03-makeimage.rst#处理图片",
+      "file": "fkbook/anhe/03-makeimage.rst",
+      "line": 36,
+      "endLine": 94,
+      "level": 2,
+      "title": "处理图片",
+      "path": [
+        "武将美化"
+      ],
+      "chars": 897
+    },
+    {
+      "id": "fkbook/anhe/03-makeimage.rst#将图片加入游戏",
+      "file": "fkbook/anhe/03-makeimage.rst",
+      "line": 94,
+      "endLine": 135,
+      "level": 2,
+      "title": "将图片加入游戏",
+      "path": [
+        "武将美化"
+      ],
+      "chars": 710
+    },
+    {
+      "id": "fkbook/anhe/04-newskill.rst#创建一个新技能",
+      "file": "fkbook/anhe/04-newskill.rst",
+      "line": 1,
+      "endLine": 153,
+      "level": 1,
+      "title": "创建一个新技能",
+      "path": [],
+      "chars": 2884
+    },
+    {
+      "id": "fkbook/anhe/05-audio.rst#添加音效",
+      "file": "fkbook/anhe/05-audio.rst",
+      "line": 1,
+      "endLine": 140,
+      "level": 1,
+      "title": "添加音效",
+      "path": [],
+      "chars": 2351
+    },
+    {
+      "id": "fkbook/anhe/05-audio.rst#打造自己的声音工作室",
+      "file": "fkbook/anhe/05-audio.rst",
+      "line": 8,
+      "endLine": 20,
+      "level": 2,
+      "title": "打造自己的声音工作室",
+      "path": [
+        "添加音效"
+      ],
+      "chars": 240
+    },
+    {
+      "id": "fkbook/anhe/05-audio.rst#添加技能使用音效",
+      "file": "fkbook/anhe/05-audio.rst",
+      "line": 20,
+      "endLine": 96,
+      "level": 2,
+      "title": "添加技能使用音效",
+      "path": [
+        "添加音效"
+      ],
+      "chars": 1302
+    },
+    {
+      "id": "fkbook/anhe/05-audio.rst#添加武将阵亡音效",
+      "file": "fkbook/anhe/05-audio.rst",
+      "line": 96,
+      "endLine": 140,
+      "level": 2,
+      "title": "添加武将阵亡音效",
+      "path": [
+        "添加音效"
+      ],
+      "chars": 713
+    },
+    {
+      "id": "fkbook/anhe/06-git.rst#发布与更新自己的拓展吧",
+      "file": "fkbook/anhe/06-git.rst",
+      "line": 3,
+      "endLine": 304,
+      "level": 1,
+      "title": "发布与更新自己的拓展吧",
+      "path": [],
+      "chars": 6399
+    },
+    {
+      "id": "fkbook/anhe/06-git.rst#关于Git",
+      "file": "fkbook/anhe/06-git.rst",
+      "line": 14,
+      "endLine": 42,
+      "level": 2,
+      "title": "关于Git",
+      "path": [
+        "发布与更新自己的拓展吧"
+      ],
+      "chars": 688
+    },
+    {
+      "id": "fkbook/anhe/06-git.rst#安装Git",
+      "file": "fkbook/anhe/06-git.rst",
+      "line": 42,
+      "endLine": 78,
+      "level": 2,
+      "title": "安装Git",
+      "path": [
+        "发布与更新自己的拓展吧"
+      ],
+      "chars": 890
+    },
+    {
+      "id": "fkbook/anhe/06-git.rst#初次运行Git",
+      "file": "fkbook/anhe/06-git.rst",
+      "line": 78,
+      "endLine": 147,
+      "level": 2,
+      "title": "初次运行Git",
+      "path": [
+        "发布与更新自己的拓展吧"
+      ],
+      "chars": 1506
+    },
+    {
+      "id": "fkbook/anhe/06-git.rst#为拓展包创建git仓库",
+      "file": "fkbook/anhe/06-git.rst",
+      "line": 147,
+      "endLine": 211,
+      "level": 2,
+      "title": "为拓展包创建git仓库",
+      "path": [
+        "发布与更新自己的拓展吧"
+      ],
+      "chars": 1453
+    },
+    {
+      "id": "fkbook/anhe/06-git.rst#上传拓展",
+      "file": "fkbook/anhe/06-git.rst",
+      "line": 211,
+      "endLine": 271,
+      "level": 2,
+      "title": "上传拓展",
+      "path": [
+        "发布与更新自己的拓展吧"
+      ],
+      "chars": 1063
+    },
+    {
+      "id": "fkbook/anhe/06-git.rst#更新拓展",
+      "file": "fkbook/anhe/06-git.rst",
+      "line": 271,
+      "endLine": 304,
+      "level": 2,
+      "title": "更新拓展",
+      "path": [
+        "发布与更新自己的拓展吧"
+      ],
+      "chars": 570
+    },
+    {
+      "id": "fkbook/anhe/07-comment-log.rst#添加提示信息",
+      "file": "fkbook/anhe/07-comment-log.rst",
+      "line": 1,
+      "endLine": 222,
+      "level": 1,
+      "title": "添加提示信息",
+      "path": [],
+      "chars": 3975
+    },
+    {
+      "id": "fkbook/anhe/07-comment-log.rst#添加代码注释",
+      "file": "fkbook/anhe/07-comment-log.rst",
+      "line": 7,
+      "endLine": 65,
+      "level": 2,
+      "title": "添加代码注释",
+      "path": [
+        "添加提示信息"
+      ],
+      "chars": 854
+    },
+    {
+      "id": "fkbook/anhe/07-comment-log.rst#显示战报信息",
+      "file": "fkbook/anhe/07-comment-log.rst",
+      "line": 65,
+      "endLine": 222,
+      "level": 2,
+      "title": "显示战报信息",
+      "path": [
+        "添加提示信息"
+      ],
+      "chars": 3048
+    },
+    {
+      "id": "fkbook/anhe/08-distance.rst#修改距离",
+      "file": "fkbook/anhe/08-distance.rst",
+      "line": 1,
+      "endLine": 115,
+      "level": 1,
+      "title": "修改距离",
+      "path": [],
+      "chars": 2307
+    },
+    {
+      "id": "fkbook/anhe/09-manage-skill.rst#技能管理",
+      "file": "fkbook/anhe/09-manage-skill.rst",
+      "line": 1,
+      "endLine": 430,
+      "level": 1,
+      "title": "技能管理",
+      "path": [],
+      "chars": 14838
+    },
+    {
+      "id": "fkbook/anhe/09-manage-skill.rst#技能判定",
+      "file": "fkbook/anhe/09-manage-skill.rst",
+      "line": 4,
+      "endLine": 25,
+      "level": 2,
+      "title": "技能判定",
+      "path": [
+        "技能管理"
+      ],
+      "chars": 430
+    },
+    {
+      "id": "fkbook/anhe/09-manage-skill.rst#创建技能",
+      "file": "fkbook/anhe/09-manage-skill.rst",
+      "line": 25,
+      "endLine": 402,
+      "level": 2,
+      "title": "创建技能",
+      "path": [
+        "技能管理"
+      ],
+      "chars": 13730
+    },
+    {
+      "id": "fkbook/anhe/09-manage-skill.rst#视为技",
+      "file": "fkbook/anhe/09-manage-skill.rst",
+      "line": 55,
+      "endLine": 115,
+      "level": 3,
+      "title": "视为技",
+      "path": [
+        "技能管理",
+        "创建技能"
+      ],
+      "chars": 2657
+    },
+    {
+      "id": "fkbook/anhe/09-manage-skill.rst#触发技",
+      "file": "fkbook/anhe/09-manage-skill.rst",
+      "line": 115,
+      "endLine": 166,
+      "level": 3,
+      "title": "触发技",
+      "path": [
+        "技能管理",
+        "创建技能"
+      ],
+      "chars": 1266
+    },
+    {
+      "id": "fkbook/anhe/09-manage-skill.rst#禁止技",
+      "file": "fkbook/anhe/09-manage-skill.rst",
+      "line": 166,
+      "endLine": 199,
+      "level": 3,
+      "title": "禁止技",
+      "path": [
+        "技能管理",
+        "创建技能"
+      ],
+      "chars": 1392
+    },
+    {
+      "id": "fkbook/anhe/09-manage-skill.rst#距离修改技",
+      "file": "fkbook/anhe/09-manage-skill.rst",
+      "line": 199,
+      "endLine": 222,
+      "level": 3,
+      "title": "距离修改技",
+      "path": [
+        "技能管理",
+        "创建技能"
+      ],
+      "chars": 594
+    },
+    {
+      "id": "fkbook/anhe/09-manage-skill.rst#手牌上限技",
+      "file": "fkbook/anhe/09-manage-skill.rst",
+      "line": 222,
+      "endLine": 245,
+      "level": 3,
+      "title": "手牌上限技",
+      "path": [
+        "技能管理",
+        "创建技能"
+      ],
+      "chars": 736
+    },
+    {
+      "id": "fkbook/anhe/09-manage-skill.rst#攻击范围技",
+      "file": "fkbook/anhe/09-manage-skill.rst",
+      "line": 245,
+      "endLine": 272,
+      "level": 3,
+      "title": "攻击范围技",
+      "path": [
+        "技能管理",
+        "创建技能"
+      ],
+      "chars": 1031
+    },
+    {
+      "id": "fkbook/anhe/09-manage-skill.rst#失效技",
+      "file": "fkbook/anhe/09-manage-skill.rst",
+      "line": 272,
+      "endLine": 292,
+      "level": 3,
+      "title": "失效技",
+      "path": [
+        "技能管理",
+        "创建技能"
+      ],
+      "chars": 603
+    },
+    {
+      "id": "fkbook/anhe/09-manage-skill.rst#目标选择技",
+      "file": "fkbook/anhe/09-manage-skill.rst",
+      "line": 292,
+      "endLine": 330,
+      "level": 3,
+      "title": "目标选择技",
+      "path": [
+        "技能管理",
+        "创建技能"
+      ],
+      "chars": 1928
+    },
+    {
+      "id": "fkbook/anhe/09-manage-skill.rst#可见技",
+      "file": "fkbook/anhe/09-manage-skill.rst",
+      "line": 330,
+      "endLine": 350,
+      "level": 3,
+      "title": "可见技",
+      "path": [
+        "技能管理",
+        "创建技能"
+      ],
+      "chars": 553
+    },
+    {
+      "id": "fkbook/anhe/09-manage-skill.rst#卡牌技",
+      "file": "fkbook/anhe/09-manage-skill.rst",
+      "line": 350,
+      "endLine": 402,
+      "level": 3,
+      "title": "卡牌技",
+      "path": [
+        "技能管理",
+        "创建技能"
+      ],
+      "chars": 2663
+    },
+    {
+      "id": "fkbook/anhe/09-manage-skill.rst#获得或失去技能",
+      "file": "fkbook/anhe/09-manage-skill.rst",
+      "line": 402,
+      "endLine": 430,
+      "level": 2,
+      "title": "获得或失去技能",
+      "path": [
+        "技能管理"
+      ],
+      "chars": 659
+    },
+    {
+      "id": "fkbook/anhe/10-change-hp.rst#体力变更",
+      "file": "fkbook/anhe/10-change-hp.rst",
+      "line": 1,
+      "endLine": 222,
+      "level": 1,
+      "title": "体力变更",
+      "path": [],
+      "chars": 4411
+    },
+    {
+      "id": "fkbook/anhe/10-change-hp.rst#体力流失",
+      "file": "fkbook/anhe/10-change-hp.rst",
+      "line": 6,
+      "endLine": 47,
+      "level": 2,
+      "title": "体力流失",
+      "path": [
+        "体力变更"
+      ],
+      "chars": 840
+    },
+    {
+      "id": "fkbook/anhe/10-change-hp.rst#制造伤害",
+      "file": "fkbook/anhe/10-change-hp.rst",
+      "line": 47,
+      "endLine": 121,
+      "level": 2,
+      "title": "制造伤害",
+      "path": [
+        "体力变更"
+      ],
+      "chars": 1370
+    },
+    {
+      "id": "fkbook/anhe/10-change-hp.rst#回复体力",
+      "file": "fkbook/anhe/10-change-hp.rst",
+      "line": 121,
+      "endLine": 184,
+      "level": 2,
+      "title": "回复体力",
+      "path": [
+        "体力变更"
+      ],
+      "chars": 1199
+    },
+    {
+      "id": "fkbook/anhe/10-change-hp.rst#体力上限修改",
+      "file": "fkbook/anhe/10-change-hp.rst",
+      "line": 184,
+      "endLine": 222,
+      "level": 2,
+      "title": "体力上限修改",
+      "path": [
+        "体力变更"
+      ],
+      "chars": 865
+    },
+    {
+      "id": "fkbook/anhe/11-change-game-process.rst#游戏进程",
+      "file": "fkbook/anhe/11-change-game-process.rst",
+      "line": 1,
+      "endLine": 222,
+      "level": 1,
+      "title": "游戏进程",
+      "path": [],
+      "chars": 4214
+    },
+    {
+      "id": "fkbook/anhe/11-change-game-process.rst#阶段触发技能",
+      "file": "fkbook/anhe/11-change-game-process.rst",
+      "line": 20,
+      "endLine": 90,
+      "level": 2,
+      "title": "阶段触发技能",
+      "path": [
+        "游戏进程"
+      ],
+      "chars": 1353
+    },
+    {
+      "id": "fkbook/anhe/11-change-game-process.rst#跳过阶段",
+      "file": "fkbook/anhe/11-change-game-process.rst",
+      "line": 90,
+      "endLine": 134,
+      "level": 2,
+      "title": "跳过阶段",
+      "path": [
+        "游戏进程"
+      ],
+      "chars": 835
+    },
+    {
+      "id": "fkbook/anhe/11-change-game-process.rst#启用翻面",
+      "file": "fkbook/anhe/11-change-game-process.rst",
+      "line": 134,
+      "endLine": 172,
+      "level": 2,
+      "title": "启用翻面",
+      "path": [
+        "游戏进程"
+      ],
+      "chars": 849
+    },
+    {
+      "id": "fkbook/anhe/11-change-game-process.rst#额外回合",
+      "file": "fkbook/anhe/11-change-game-process.rst",
+      "line": 172,
+      "endLine": 222,
+      "level": 2,
+      "title": "额外回合",
+      "path": [
+        "游戏进程"
+      ],
+      "chars": 960
+    },
+    {
+      "id": "fkbook/anhe/12-arrange.rst#新月杀标记/技能名格式整理",
+      "file": "fkbook/anhe/12-arrange.rst",
+      "line": 3,
+      "endLine": 124,
+      "level": 1,
+      "title": "新月杀标记/技能名格式整理",
+      "path": [],
+      "chars": 2348
+    },
+    {
+      "id": "fkbook/anhe/12-arrange.rst#新月杀标记格式整理",
+      "file": "fkbook/anhe/12-arrange.rst",
+      "line": 9,
+      "endLine": 79,
+      "level": 2,
+      "title": "新月杀标记格式整理",
+      "path": [
+        "新月杀标记/技能名格式整理"
+      ],
+      "chars": 1392
+    },
+    {
+      "id": "fkbook/anhe/12-arrange.rst#新月杀技能名格式整理",
+      "file": "fkbook/anhe/12-arrange.rst",
+      "line": 79,
+      "endLine": 109,
+      "level": 2,
+      "title": "新月杀技能名格式整理",
+      "path": [
+        "新月杀标记/技能名格式整理"
+      ],
+      "chars": 643
+    },
+    {
+      "id": "fkbook/anhe/12-arrange.rst#新月杀其他命名格式整理",
+      "file": "fkbook/anhe/12-arrange.rst",
+      "line": 109,
+      "endLine": 119,
+      "level": 2,
+      "title": "新月杀其他命名格式整理",
+      "path": [
+        "新月杀标记/技能名格式整理"
+      ],
+      "chars": 173
+    },
+    {
+      "id": "fkbook/anhe/12-arrange.rst#新月杀QML备注",
+      "file": "fkbook/anhe/12-arrange.rst",
+      "line": 119,
+      "endLine": 124,
+      "level": 2,
+      "title": "新月杀QML备注",
+      "path": [
+        "新月杀标记/技能名格式整理"
+      ],
+      "chars": 76
+    },
+    {
+      "id": "fkbook/anhe/13-debug.rst#技巧：调试您的代码",
+      "file": "fkbook/anhe/13-debug.rst",
+      "line": 3,
+      "endLine": 193,
+      "level": 1,
+      "title": "技巧：调试您的代码",
+      "path": [],
+      "chars": 3639
+    },
+    {
+      "id": "fkbook/anhe/13-debug.rst#使用debugger.lua",
+      "file": "fkbook/anhe/13-debug.rst",
+      "line": 12,
+      "endLine": 48,
+      "level": 2,
+      "title": "使用debugger.lua",
+      "path": [
+        "技巧：调试您的代码"
+      ],
+      "chars": 713
+    },
+    {
+      "id": "fkbook/anhe/13-debug.rst#利用VSCode的Lua调试插件进行调试",
+      "file": "fkbook/anhe/13-debug.rst",
+      "line": 48,
+      "endLine": 162,
+      "level": 2,
+      "title": "利用VSCode的Lua调试插件进行调试",
+      "path": [
+        "技巧：调试您的代码"
+      ],
+      "chars": 2297
+    },
+    {
+      "id": "fkbook/anhe/13-debug.rst#一些在调试中可能有用的函数",
+      "file": "fkbook/anhe/13-debug.rst",
+      "line": 162,
+      "endLine": 193,
+      "level": 2,
+      "title": "一些在调试中可能有用的函数",
+      "path": [
+        "技巧：调试您的代码"
+      ],
+      "chars": 412
+    },
+    {
+      "id": "fkbook/anhe/13-debug.rst#print",
+      "file": "fkbook/anhe/13-debug.rst",
+      "line": 169,
+      "endLine": 176,
+      "level": 3,
+      "title": "print",
+      "path": [
+        "技巧：调试您的代码",
+        "一些在调试中可能有用的函数"
+      ],
+      "chars": 93
+    },
+    {
+      "id": "fkbook/anhe/13-debug.rst#p",
+      "file": "fkbook/anhe/13-debug.rst",
+      "line": 176,
+      "endLine": 183,
+      "level": 3,
+      "title": "p",
+      "path": [
+        "技巧：调试您的代码",
+        "一些在调试中可能有用的函数"
+      ],
+      "chars": 80
+    },
+    {
+      "id": "fkbook/anhe/13-debug.rst#json.encode",
+      "file": "fkbook/anhe/13-debug.rst",
+      "line": 183,
+      "endLine": 188,
+      "level": 3,
+      "title": "json.encode",
+      "path": [
+        "技巧：调试您的代码",
+        "一些在调试中可能有用的函数"
+      ],
+      "chars": 63
+    },
+    {
+      "id": "fkbook/anhe/13-debug.rst#GameLogic:dumpEventStack()",
+      "file": "fkbook/anhe/13-debug.rst",
+      "line": 188,
+      "endLine": 193,
+      "level": 3,
+      "title": "GameLogic:dumpEventStack()",
+      "path": [
+        "技巧：调试您的代码",
+        "一些在调试中可能有用的函数"
+      ],
+      "chars": 79
+    },
+    {
+      "id": "fkbook/anhe/14-eventstack.rst#解析：事件栈",
+      "file": "fkbook/anhe/14-eventstack.rst",
+      "line": 3,
+      "endLine": 126,
+      "level": 1,
+      "title": "解析：事件栈",
+      "path": [],
+      "chars": 3211
+    },
+    {
+      "id": "fkbook/anhe/14-eventstack.rst#何谓事件",
+      "file": "fkbook/anhe/14-eventstack.rst",
+      "line": 8,
+      "endLine": 25,
+      "level": 2,
+      "title": "何谓事件",
+      "path": [
+        "解析：事件栈"
+      ],
+      "chars": 368
+    },
+    {
+      "id": "fkbook/anhe/14-eventstack.rst#初步观察事件栈",
+      "file": "fkbook/anhe/14-eventstack.rst",
+      "line": 25,
+      "endLine": 60,
+      "level": 2,
+      "title": "初步观察事件栈",
+      "path": [
+        "解析：事件栈"
+      ],
+      "chars": 988
+    },
+    {
+      "id": "fkbook/anhe/14-eventstack.rst#如何调查事件栈",
+      "file": "fkbook/anhe/14-eventstack.rst",
+      "line": 60,
+      "endLine": 73,
+      "level": 2,
+      "title": "如何调查事件栈",
+      "path": [
+        "解析：事件栈"
+      ],
+      "chars": 479
+    },
+    {
+      "id": "fkbook/anhe/14-eventstack.rst#如何给事件附加数据",
+      "file": "fkbook/anhe/14-eventstack.rst",
+      "line": 73,
+      "endLine": 84,
+      "level": 2,
+      "title": "如何给事件附加数据",
+      "path": [
+        "解析：事件栈"
+      ],
+      "chars": 163
+    },
+    {
+      "id": "fkbook/anhe/14-eventstack.rst#如何终止事件",
+      "file": "fkbook/anhe/14-eventstack.rst",
+      "line": 84,
+      "endLine": 97,
+      "level": 2,
+      "title": "如何终止事件",
+      "path": [
+        "解析：事件栈"
+      ],
+      "chars": 523
+    },
+    {
+      "id": "fkbook/anhe/14-eventstack.rst#关于事件的灾后清理",
+      "file": "fkbook/anhe/14-eventstack.rst",
+      "line": 97,
+      "endLine": 126,
+      "level": 2,
+      "title": "关于事件的灾后清理",
+      "path": [
+        "解析：事件栈"
+      ],
+      "chars": 618
+    },
+    {
+      "id": "fkbook/anhe/15-exppattern.rst#解析：Exppattern",
+      "file": "fkbook/anhe/15-exppattern.rst",
+      "line": 3,
+      "endLine": 52,
+      "level": 1,
+      "title": "解析：Exppattern",
+      "path": [],
+      "chars": 1171
+    },
+    {
+      "id": "fkbook/anhe/15-exppattern.rst#pattern的语法",
+      "file": "fkbook/anhe/15-exppattern.rst",
+      "line": 12,
+      "endLine": 41,
+      "level": 2,
+      "title": "pattern的语法",
+      "path": [
+        "解析：Exppattern"
+      ],
+      "chars": 696
+    },
+    {
+      "id": "fkbook/anhe/15-exppattern.rst#对pattern进行测试",
+      "file": "fkbook/anhe/15-exppattern.rst",
+      "line": 41,
+      "endLine": 52,
+      "level": 2,
+      "title": "对pattern进行测试",
+      "path": [
+        "解析：Exppattern"
+      ],
+      "chars": 161
+    },
+    {
+      "id": "fkbook/anhe/16-extension.rst#拓展规范文档",
+      "file": "fkbook/anhe/16-extension.rst",
+      "line": 1,
+      "endLine": 542,
+      "level": 1,
+      "title": "拓展规范文档",
+      "path": [],
+      "chars": 11587
+    },
+    {
+      "id": "fkbook/anhe/16-extension.rst#简介",
+      "file": "fkbook/anhe/16-extension.rst",
+      "line": 4,
+      "endLine": 14,
+      "level": 2,
+      "title": "简介",
+      "path": [
+        "拓展规范文档"
+      ],
+      "chars": 155
+    },
+    {
+      "id": "fkbook/anhe/16-extension.rst#拓展与包的基本结构",
+      "file": "fkbook/anhe/16-extension.rst",
+      "line": 14,
+      "endLine": 193,
+      "level": 2,
+      "title": "拓展与包的基本结构",
+      "path": [
+        "拓展规范文档"
+      ],
+      "chars": 3321
+    },
+    {
+      "id": "fkbook/anhe/16-extension.rst#audio",
+      "file": "fkbook/anhe/16-extension.rst",
+      "line": 59,
+      "endLine": 88,
+      "level": 3,
+      "title": "audio",
+      "path": [
+        "拓展规范文档",
+        "拓展与包的基本结构"
+      ],
+      "chars": 675
+    },
+    {
+      "id": "fkbook/anhe/16-extension.rst#image",
+      "file": "fkbook/anhe/16-extension.rst",
+      "line": 88,
+      "endLine": 151,
+      "level": 3,
+      "title": "image",
+      "path": [
+        "拓展规范文档",
+        "拓展与包的基本结构"
+      ],
+      "chars": 1151
+    },
+    {
+      "id": "fkbook/anhe/16-extension.rst#init.lua",
+      "file": "fkbook/anhe/16-extension.rst",
+      "line": 151,
+      "endLine": 193,
+      "level": 3,
+      "title": "init.lua",
+      "path": [
+        "拓展规范文档",
+        "拓展与包的基本结构"
+      ],
+      "chars": 783
+    },
+    {
+      "id": "fkbook/anhe/16-extension.rst#子扩展包的结构",
+      "file": "fkbook/anhe/16-extension.rst",
+      "line": 193,
+      "endLine": 223,
+      "level": 2,
+      "title": "子扩展包的结构",
+      "path": [
+        "拓展规范文档"
+      ],
+      "chars": 622
+    },
+    {
+      "id": "fkbook/anhe/16-extension.rst#武将子扩展包",
+      "file": "fkbook/anhe/16-extension.rst",
+      "line": 223,
+      "endLine": 308,
+      "level": 2,
+      "title": "武将子扩展包",
+      "path": [
+        "拓展规范文档"
+      ],
+      "chars": 2360
+    },
+    {
+      "id": "fkbook/anhe/16-extension.rst#卡牌子扩展包",
+      "file": "fkbook/anhe/16-extension.rst",
+      "line": 308,
+      "endLine": 360,
+      "level": 2,
+      "title": "卡牌子扩展包",
+      "path": [
+        "拓展规范文档"
+      ],
+      "chars": 1558
+    },
+    {
+      "id": "fkbook/anhe/16-extension.rst#模式子扩展包",
+      "file": "fkbook/anhe/16-extension.rst",
+      "line": 360,
+      "endLine": 542,
+      "level": 2,
+      "title": "模式子扩展包",
+      "path": [
+        "拓展规范文档"
+      ],
+      "chars": 3541
+    },
+    {
+      "id": "fkbook/anhe/16-extension.rst#游戏模式的主要定义和逻辑定义",
+      "file": "fkbook/anhe/16-extension.rst",
+      "line": 427,
+      "endLine": 476,
+      "level": 3,
+      "title": "游戏模式的主要定义和逻辑定义",
+      "path": [
+        "拓展规范文档",
+        "模式子扩展包"
+      ],
+      "chars": 1050
+    },
+    {
+      "id": "fkbook/anhe/16-extension.rst#assignRoles()",
+      "file": "fkbook/anhe/16-extension.rst",
+      "line": 476,
+      "endLine": 484,
+      "level": 3,
+      "title": "assignRoles()",
+      "path": [
+        "拓展规范文档",
+        "模式子扩展包"
+      ],
+      "chars": 99
+    },
+    {
+      "id": "fkbook/anhe/16-extension.rst#adjustSeats()",
+      "file": "fkbook/anhe/16-extension.rst",
+      "line": 484,
+      "endLine": 490,
+      "level": 3,
+      "title": "adjustSeats()",
+      "path": [
+        "拓展规范文档",
+        "模式子扩展包"
+      ],
+      "chars": 63
+    },
+    {
+      "id": "fkbook/anhe/16-extension.rst#chooseGenerals()",
+      "file": "fkbook/anhe/16-extension.rst",
+      "line": 490,
+      "endLine": 496,
+      "level": 3,
+      "title": "chooseGenerals()",
+      "path": [
+        "拓展规范文档",
+        "模式子扩展包"
+      ],
+      "chars": 76
+    },
+    {
+      "id": "fkbook/anhe/16-extension.rst#buildPlayerCircle()",
+      "file": "fkbook/anhe/16-extension.rst",
+      "line": 496,
+      "endLine": 502,
+      "level": 3,
+      "title": "buildPlayerCircle()",
+      "path": [
+        "拓展规范文档",
+        "模式子扩展包"
+      ],
+      "chars": 72
+    },
+    {
+      "id": "fkbook/anhe/16-extension.rst#broadcastGeneral()",
+      "file": "fkbook/anhe/16-extension.rst",
+      "line": 502,
+      "endLine": 508,
+      "level": 3,
+      "title": "broadcastGeneral()",
+      "path": [
+        "拓展规范文档",
+        "模式子扩展包"
+      ],
+      "chars": 94
+    },
+    {
+      "id": "fkbook/anhe/16-extension.rst#prepareDrawPile()",
+      "file": "fkbook/anhe/16-extension.rst",
+      "line": 508,
+      "endLine": 514,
+      "level": 3,
+      "title": "prepareDrawPile()",
+      "path": [
+        "拓展规范文档",
+        "模式子扩展包"
+      ],
+      "chars": 81
+    },
+    {
+      "id": "fkbook/anhe/16-extension.rst#attachSkillToPlayers()",
+      "file": "fkbook/anhe/16-extension.rst",
+      "line": 514,
+      "endLine": 522,
+      "level": 3,
+      "title": "attachSkillToPlayers()",
+      "path": [
+        "拓展规范文档",
+        "模式子扩展包"
+      ],
+      "chars": 118
+    },
+    {
+      "id": "fkbook/anhe/16-extension.rst#prepareForStart()",
+      "file": "fkbook/anhe/16-extension.rst",
+      "line": 522,
+      "endLine": 528,
+      "level": 3,
+      "title": "prepareForStart()",
+      "path": [
+        "拓展规范文档",
+        "模式子扩展包"
+      ],
+      "chars": 93
+    },
+    {
+      "id": "fkbook/anhe/16-extension.rst#action()",
+      "file": "fkbook/anhe/16-extension.rst",
+      "line": 528,
+      "endLine": 542,
+      "level": 3,
+      "title": "action()",
+      "path": [
+        "拓展规范文档",
+        "模式子扩展包"
+      ],
+      "chars": 251
+    },
+    {
+      "id": "fkbook/anhe/example/init.lua#init",
+      "file": "fkbook/anhe/example/init.lua",
+      "line": 1,
+      "endLine": 7,
+      "level": 1,
+      "title": "init",
+      "path": [
+        "anhe",
+        "example"
+      ],
+      "chars": 71
+    },
+    {
+      "id": "fkbook/anhe/example/xuexi.lua#xuexi",
+      "file": "fkbook/anhe/example/xuexi.lua",
+      "line": 1,
+      "endLine": 70,
+      "level": 1,
+      "title": "xuexi",
+      "path": [
+        "anhe",
+        "example"
+      ],
+      "chars": 1414
+    },
+    {
+      "id": "fkbook/anhe/index.rst#新月杀拓展之书",
+      "file": "fkbook/anhe/index.rst",
+      "line": 3,
+      "endLine": 30,
+      "level": 1,
+      "title": "新月杀拓展之书",
+      "path": [],
+      "chars": 458
+    },
+    {
+      "id": "fkbook/api-reference/core/abstractroom.rst#Class-``AbstractRoom``",
+      "file": "fkbook/api-reference/core/abstractroom.rst",
+      "line": 1,
+      "endLine": 8,
+      "level": 1,
+      "title": "Class ``AbstractRoom``",
+      "path": [],
+      "chars": 115
+    },
+    {
+      "id": "fkbook/api-reference/core/card.rst#Class-``Card``",
+      "file": "fkbook/api-reference/core/card.rst",
+      "line": 1,
+      "endLine": 9,
+      "level": 1,
+      "title": "Class ``Card``",
+      "path": [],
+      "chars": 100
+    },
+    {
+      "id": "fkbook/api-reference/core/engine.rst#Class-``Engine``",
+      "file": "fkbook/api-reference/core/engine.rst",
+      "line": 1,
+      "endLine": 9,
+      "level": 1,
+      "title": "Class ``Engine``",
+      "path": [],
+      "chars": 104
+    },
+    {
+      "id": "fkbook/api-reference/core/gamemode.rst#Class-``GameMode``",
+      "file": "fkbook/api-reference/core/gamemode.rst",
+      "line": 1,
+      "endLine": 8,
+      "level": 1,
+      "title": "Class ``GameMode``",
+      "path": [],
+      "chars": 107
+    },
+    {
+      "id": "fkbook/api-reference/core/general.rst#Class-``General``",
+      "file": "fkbook/api-reference/core/general.rst",
+      "line": 1,
+      "endLine": 9,
+      "level": 1,
+      "title": "Class ``General``",
+      "path": [],
+      "chars": 106
+    },
+    {
+      "id": "fkbook/api-reference/core/index.rst#Module-``core``",
+      "file": "fkbook/api-reference/core/index.rst",
+      "line": 1,
+      "endLine": 16,
+      "level": 1,
+      "title": "Module ``core``",
+      "path": [],
+      "chars": 185
+    },
+    {
+      "id": "fkbook/api-reference/core/package.rst#Class-``Package``",
+      "file": "fkbook/api-reference/core/package.rst",
+      "line": 1,
+      "endLine": 9,
+      "level": 1,
+      "title": "Class ``Package``",
+      "path": [],
+      "chars": 106
+    },
+    {
+      "id": "fkbook/api-reference/core/player.rst#Class-``Player``",
+      "file": "fkbook/api-reference/core/player.rst",
+      "line": 1,
+      "endLine": 8,
+      "level": 1,
+      "title": "Class ``Player``",
+      "path": [],
+      "chars": 103
+    },
+    {
+      "id": "fkbook/api-reference/core/skill.rst#Class-``Skill``",
+      "file": "fkbook/api-reference/core/skill.rst",
+      "line": 1,
+      "endLine": 9,
+      "level": 1,
+      "title": "Class ``Skill``",
+      "path": [],
+      "chars": 102
+    },
+    {
+      "id": "fkbook/api-reference/index.rst#API参考",
+      "file": "fkbook/api-reference/index.rst",
+      "line": 1,
+      "endLine": 17,
+      "level": 1,
+      "title": "API参考",
+      "path": [],
+      "chars": 156
+    },
+    {
+      "id": "fkbook/api-reference/server/gameevent.rst#Class-``GameEvent``",
+      "file": "fkbook/api-reference/server/gameevent.rst",
+      "line": 1,
+      "endLine": 10,
+      "level": 1,
+      "title": "Class ``GameEvent``",
+      "path": [],
+      "chars": 111
+    },
+    {
+      "id": "fkbook/api-reference/server/gameeventwrappers.rst#Class-``GameEventWrappers``",
+      "file": "fkbook/api-reference/server/gameeventwrappers.rst",
+      "line": 1,
+      "endLine": 40,
+      "level": 1,
+      "title": "Class ``GameEventWrappers``",
+      "path": [],
+      "chars": 684
+    },
+    {
+      "id": "fkbook/api-reference/server/gamelogic.rst#Class-``GameLogic``",
+      "file": "fkbook/api-reference/server/gamelogic.rst",
+      "line": 1,
+      "endLine": 9,
+      "level": 1,
+      "title": "Class ``GameLogic``",
+      "path": [],
+      "chars": 110
+    },
+    {
+      "id": "fkbook/api-reference/server/index.rst#Module-``server``",
+      "file": "fkbook/api-reference/server/index.rst",
+      "line": 1,
+      "endLine": 14,
+      "level": 1,
+      "title": "Module ``server``",
+      "path": [],
+      "chars": 178
+    },
+    {
+      "id": "fkbook/api-reference/server/request.rst#Class-``Request``",
+      "file": "fkbook/api-reference/server/request.rst",
+      "line": 1,
+      "endLine": 10,
+      "level": 1,
+      "title": "Class ``Request``",
+      "path": [],
+      "chars": 107
+    },
+    {
+      "id": "fkbook/api-reference/server/room.rst#Class-``Room``",
+      "file": "fkbook/api-reference/server/room.rst",
+      "line": 1,
+      "endLine": 8,
+      "level": 1,
+      "title": "Class ``Room``",
+      "path": [],
+      "chars": 99
+    },
+    {
+      "id": "fkbook/api-reference/server/serverplayer.rst#Class-``ServerPlayer``",
+      "file": "fkbook/api-reference/server/serverplayer.rst",
+      "line": 1,
+      "endLine": 9,
+      "level": 1,
+      "title": "Class ``ServerPlayer``",
+      "path": [],
+      "chars": 116
+    },
+    {
+      "id": "fkbook/create-fk-mod.rst#创建新月杀拓展",
+      "file": "fkbook/create-fk-mod.rst",
+      "line": 1,
+      "endLine": 21,
+      "level": 1,
+      "title": "创建新月杀拓展",
+      "path": [],
+      "chars": 310
+    },
+    {
+      "id": "fkbook/create-fk-mod.rst#拓展制作教程",
+      "file": "fkbook/create-fk-mod.rst",
+      "line": 11,
+      "endLine": 16,
+      "level": 2,
+      "title": "拓展制作教程",
+      "path": [
+        "创建新月杀拓展"
+      ],
+      "chars": 41
+    },
+    {
+      "id": "fkbook/create-fk-mod.rst#新月杀规则集",
+      "file": "fkbook/create-fk-mod.rst",
+      "line": 16,
+      "endLine": 21,
+      "level": 2,
+      "title": "新月杀规则集",
+      "path": [
+        "创建新月杀拓展"
+      ],
+      "chars": 41
+    },
+    {
+      "id": "fkbook/create-resource-pak.rst#创建资源包",
+      "file": "fkbook/create-resource-pak.rst",
+      "line": 1,
+      "endLine": 29,
+      "level": 1,
+      "title": "创建资源包",
+      "path": [],
+      "chars": 677
+    },
+    {
+      "id": "fkbook/index.rst#写给拓展主",
+      "file": "fkbook/index.rst",
+      "line": 1,
+      "endLine": 36,
+      "level": 1,
+      "title": "写给拓展主",
+      "path": [],
+      "chars": 463
+    },
+    {
+      "id": "fkbook/misc/ai-remake.rst#AI方案设计",
+      "file": "fkbook/misc/ai-remake.rst",
+      "line": 1,
+      "endLine": 38,
+      "level": 1,
+      "title": "AI方案设计",
+      "path": [],
+      "chars": 1484
+    },
+    {
+      "id": "fkbook/misc/index.rst#未分类的文档",
+      "file": "fkbook/misc/index.rst",
+      "line": 1,
+      "endLine": 17,
+      "level": 1,
+      "title": "未分类的文档",
+      "path": [],
+      "chars": 234
+    },
+    {
+      "id": "fkbook/misc/lua-and-qml.rst#Lua和QML的联动相关",
+      "file": "fkbook/misc/lua-and-qml.rst",
+      "line": 1,
+      "endLine": 180,
+      "level": 1,
+      "title": "Lua和QML的联动相关",
+      "path": [],
+      "chars": 3859
+    },
+    {
+      "id": "fkbook/misc/lua-and-qml.rst#从QML调用Lua",
+      "file": "fkbook/misc/lua-and-qml.rst",
+      "line": 4,
+      "endLine": 128,
+      "level": 2,
+      "title": "从QML调用Lua",
+      "path": [
+        "Lua和QML的联动相关"
+      ],
+      "chars": 2658
+    },
+    {
+      "id": "fkbook/misc/lua-and-qml.rst#Lua.tr(str)",
+      "file": "fkbook/misc/lua-and-qml.rst",
+      "line": 18,
+      "endLine": 23,
+      "level": 3,
+      "title": "Lua.tr(str)",
+      "path": [
+        "Lua和QML的联动相关",
+        "从QML调用Lua"
+      ],
+      "chars": 62
+    },
+    {
+      "id": "fkbook/misc/lua-and-qml.rst#Lua.evaluate(str)",
+      "file": "fkbook/misc/lua-and-qml.rst",
+      "line": 23,
+      "endLine": 74,
+      "level": 3,
+      "title": "Lua.evaluate(str)",
+      "path": [
+        "Lua和QML的联动相关",
+        "从QML调用Lua"
+      ],
+      "chars": 1201
+    },
+    {
+      "id": "fkbook/misc/lua-and-qml.rst#Lua.ev(str)",
+      "file": "fkbook/misc/lua-and-qml.rst",
+      "line": 74,
+      "endLine": 81,
+      "level": 3,
+      "title": "Lua.ev(str)",
+      "path": [
+        "Lua和QML的联动相关",
+        "从QML调用Lua"
+      ],
+      "chars": 107
+    },
+    {
+      "id": "fkbook/misc/lua-and-qml.rst#Lua.fn(str)",
+      "file": "fkbook/misc/lua-and-qml.rst",
+      "line": 81,
+      "endLine": 111,
+      "level": 3,
+      "title": "Lua.fn(str)",
+      "path": [
+        "Lua和QML的联动相关",
+        "从QML调用Lua"
+      ],
+      "chars": 660
+    },
+    {
+      "id": "fkbook/misc/lua-and-qml.rst#Lua.createProxy(str)",
+      "file": "fkbook/misc/lua-and-qml.rst",
+      "line": 111,
+      "endLine": 128,
+      "level": 3,
+      "title": "Lua.createProxy(str)",
+      "path": [
+        "Lua和QML的联动相关",
+        "从QML调用Lua"
+      ],
+      "chars": 422
+    },
+    {
+      "id": "fkbook/misc/lua-and-qml.rst#从Lua向Qml传递信息",
+      "file": "fkbook/misc/lua-and-qml.rst",
+      "line": 128,
+      "endLine": 180,
+      "level": 2,
+      "title": "从Lua向Qml传递信息",
+      "path": [
+        "Lua和QML的联动相关"
+      ],
+      "chars": 1163
+    },
+    {
+      "id": "fkbook/misc/mark-banner.rst#标记与banner的使用",
+      "file": "fkbook/misc/mark-banner.rst",
+      "line": 1,
+      "endLine": 112,
+      "level": 1,
+      "title": "标记与banner的使用",
+      "path": [],
+      "chars": 2068
+    },
+    {
+      "id": "fkbook/misc/mark-banner.rst#概念与基本的读写",
+      "file": "fkbook/misc/mark-banner.rst",
+      "line": 9,
+      "endLine": 40,
+      "level": 2,
+      "title": "概念与基本的读写",
+      "path": [
+        "标记与banner的使用"
+      ],
+      "chars": 585
+    },
+    {
+      "id": "fkbook/misc/mark-banner.rst#标记或Banner的显示",
+      "file": "fkbook/misc/mark-banner.rst",
+      "line": 40,
+      "endLine": 68,
+      "level": 2,
+      "title": "标记或Banner的显示",
+      "path": [
+        "标记与banner的使用"
+      ],
+      "chars": 886
+    },
+    {
+      "id": "fkbook/misc/mark-banner.rst#卡牌的标记",
+      "file": "fkbook/misc/mark-banner.rst",
+      "line": 68,
+      "endLine": 77,
+      "level": 2,
+      "title": "卡牌的标记",
+      "path": [
+        "标记与banner的使用"
+      ],
+      "chars": 89
+    },
+    {
+      "id": "fkbook/misc/mark-banner.rst#QML标记",
+      "file": "fkbook/misc/mark-banner.rst",
+      "line": 77,
+      "endLine": 84,
+      "level": 2,
+      "title": "QML标记",
+      "path": [
+        "标记与banner的使用"
+      ],
+      "chars": 54
+    },
+    {
+      "id": "fkbook/misc/mark-banner.rst#有特殊功能的标记",
+      "file": "fkbook/misc/mark-banner.rst",
+      "line": 84,
+      "endLine": 112,
+      "level": 2,
+      "title": "有特殊功能的标记",
+      "path": [
+        "标记与banner的使用"
+      ],
+      "chars": 314
+    },
+    {
+      "id": "fkbook/misc/mark-banner.rst#自动清理类",
+      "file": "fkbook/misc/mark-banner.rst",
+      "line": 94,
+      "endLine": 112,
+      "level": 3,
+      "title": "自动清理类",
+      "path": [
+        "标记与banner的使用",
+        "有特殊功能的标记"
+      ],
+      "chars": 184
+    },
+    {
+      "id": "fkbook/misc/mode-config.rst#游戏&子模式自定义config",
+      "file": "fkbook/misc/mode-config.rst",
+      "line": 1,
+      "endLine": 120,
+      "level": 1,
+      "title": "游戏&子模式自定义config",
+      "path": [],
+      "chars": 2362
+    },
+    {
+      "id": "fkbook/misc/mode-config.rst#定义配置项",
+      "file": "fkbook/misc/mode-config.rst",
+      "line": 10,
+      "endLine": 91,
+      "level": 2,
+      "title": "定义配置项",
+      "path": [
+        "游戏&子模式自定义config"
+      ],
+      "chars": 1707
+    },
+    {
+      "id": "fkbook/misc/mode-config.rst#应用与读取配置项",
+      "file": "fkbook/misc/mode-config.rst",
+      "line": 91,
+      "endLine": 120,
+      "level": 2,
+      "title": "应用与读取配置项",
+      "path": [
+        "游戏&子模式自定义config"
+      ],
+      "chars": 457
+    },
+    {
+      "id": "fkbook/misc/skin-package.rst#皮肤拓展",
+      "file": "fkbook/misc/skin-package.rst",
+      "line": 1,
+      "endLine": 63,
+      "level": 1,
+      "title": "皮肤拓展",
+      "path": [],
+      "chars": 1678
+    },
+    {
+      "id": "fkbook/misc/skin-package.rst#创建一个皮肤拓展",
+      "file": "fkbook/misc/skin-package.rst",
+      "line": 6,
+      "endLine": 63,
+      "level": 2,
+      "title": "创建一个皮肤拓展",
+      "path": [
+        "皮肤拓展"
+      ],
+      "chars": 1606
+    },
+    {
+      "id": "fkbook/misc/task.rst#关于Task",
+      "file": "fkbook/misc/task.rst",
+      "line": 1,
+      "endLine": 43,
+      "level": 1,
+      "title": "关于Task",
+      "path": [],
+      "chars": 611
+    },
+    {
+      "id": "fkbook/misc/task.rst#注册新Task",
+      "file": "fkbook/misc/task.rst",
+      "line": 14,
+      "endLine": 34,
+      "level": 2,
+      "title": "注册新Task",
+      "path": [
+        "关于Task"
+      ],
+      "chars": 297
+    },
+    {
+      "id": "fkbook/misc/task.rst#触发Task",
+      "file": "fkbook/misc/task.rst",
+      "line": 34,
+      "endLine": 43,
+      "level": 2,
+      "title": "触发Task",
+      "path": [
+        "关于Task"
+      ],
+      "chars": 119
+    },
+    {
+      "id": "fkbook/new-to-lua/15-hello-lua.rst#Lua：开始编程吧",
+      "file": "fkbook/new-to-lua/15-hello-lua.rst",
+      "line": 1,
+      "endLine": 163,
+      "level": 1,
+      "title": "Lua：开始编程吧",
+      "path": [],
+      "chars": 3048
+    },
+    {
+      "id": "fkbook/new-to-lua/15-hello-lua.rst#关于编程",
+      "file": "fkbook/new-to-lua/15-hello-lua.rst",
+      "line": 10,
+      "endLine": 30,
+      "level": 2,
+      "title": "关于编程",
+      "path": [
+        "Lua：开始编程吧"
+      ],
+      "chars": 447
+    },
+    {
+      "id": "fkbook/new-to-lua/15-hello-lua.rst#安装vscode",
+      "file": "fkbook/new-to-lua/15-hello-lua.rst",
+      "line": 30,
+      "endLine": 95,
+      "level": 2,
+      "title": "安装vscode",
+      "path": [
+        "Lua：开始编程吧"
+      ],
+      "chars": 1132
+    },
+    {
+      "id": "fkbook/new-to-lua/15-hello-lua.rst#Windows环境",
+      "file": "fkbook/new-to-lua/15-hello-lua.rst",
+      "line": 86,
+      "endLine": 95,
+      "level": 3,
+      "title": "Windows环境",
+      "path": [
+        "Lua：开始编程吧",
+        "安装vscode"
+      ],
+      "chars": 87
+    },
+    {
+      "id": "fkbook/new-to-lua/15-hello-lua.rst#开始Hello-world",
+      "file": "fkbook/new-to-lua/15-hello-lua.rst",
+      "line": 95,
+      "endLine": 163,
+      "level": 2,
+      "title": "开始Hello world",
+      "path": [
+        "Lua：开始编程吧"
+      ],
+      "chars": 1251
+    },
+    {
+      "id": "fkbook/new-to-lua/16-var-and-type.rst#Lua：变量与简单的数据类型",
+      "file": "fkbook/new-to-lua/16-var-and-type.rst",
+      "line": 1,
+      "endLine": 250,
+      "level": 1,
+      "title": "Lua：变量与简单的数据类型",
+      "path": [],
+      "chars": 4443
+    },
+    {
+      "id": "fkbook/new-to-lua/16-var-and-type.rst#关于hello.lua",
+      "file": "fkbook/new-to-lua/16-var-and-type.rst",
+      "line": 7,
+      "endLine": 31,
+      "level": 2,
+      "title": "关于hello.lua",
+      "path": [
+        "Lua：变量与简单的数据类型"
+      ],
+      "chars": 549
+    },
+    {
+      "id": "fkbook/new-to-lua/16-var-and-type.rst#变量",
+      "file": "fkbook/new-to-lua/16-var-and-type.rst",
+      "line": 31,
+      "endLine": 88,
+      "level": 2,
+      "title": "变量",
+      "path": [
+        "Lua：变量与简单的数据类型"
+      ],
+      "chars": 1128
+    },
+    {
+      "id": "fkbook/new-to-lua/16-var-and-type.rst#字符串",
+      "file": "fkbook/new-to-lua/16-var-and-type.rst",
+      "line": 88,
+      "endLine": 180,
+      "level": 2,
+      "title": "字符串",
+      "path": [
+        "Lua：变量与简单的数据类型"
+      ],
+      "chars": 1544
+    },
+    {
+      "id": "fkbook/new-to-lua/16-var-and-type.rst#拼接字符串",
+      "file": "fkbook/new-to-lua/16-var-and-type.rst",
+      "line": 109,
+      "endLine": 140,
+      "level": 3,
+      "title": "拼接字符串",
+      "path": [
+        "Lua：变量与简单的数据类型",
+        "字符串"
+      ],
+      "chars": 547
+    },
+    {
+      "id": "fkbook/new-to-lua/16-var-and-type.rst#避免语法错误",
+      "file": "fkbook/new-to-lua/16-var-and-type.rst",
+      "line": 140,
+      "endLine": 180,
+      "level": 3,
+      "title": "避免语法错误",
+      "path": [
+        "Lua：变量与简单的数据类型",
+        "字符串"
+      ],
+      "chars": 625
+    },
+    {
+      "id": "fkbook/new-to-lua/16-var-and-type.rst#数字",
+      "file": "fkbook/new-to-lua/16-var-and-type.rst",
+      "line": 180,
+      "endLine": 218,
+      "level": 2,
+      "title": "数字",
+      "path": [
+        "Lua：变量与简单的数据类型"
+      ],
+      "chars": 574
+    },
+    {
+      "id": "fkbook/new-to-lua/16-var-and-type.rst#注释",
+      "file": "fkbook/new-to-lua/16-var-and-type.rst",
+      "line": 218,
+      "endLine": 250,
+      "level": 2,
+      "title": "注释",
+      "path": [
+        "Lua：变量与简单的数据类型"
+      ],
+      "chars": 542
+    },
+    {
+      "id": "fkbook/new-to-lua/16-var-and-type.rst#如何编写注释",
+      "file": "fkbook/new-to-lua/16-var-and-type.rst",
+      "line": 224,
+      "endLine": 236,
+      "level": 3,
+      "title": "如何编写注释",
+      "path": [
+        "Lua：变量与简单的数据类型",
+        "注释"
+      ],
+      "chars": 151
+    },
+    {
+      "id": "fkbook/new-to-lua/16-var-and-type.rst#该编写怎么样的注释",
+      "file": "fkbook/new-to-lua/16-var-and-type.rst",
+      "line": 236,
+      "endLine": 250,
+      "level": 3,
+      "title": "该编写怎么样的注释",
+      "path": [
+        "Lua：变量与简单的数据类型",
+        "注释"
+      ],
+      "chars": 307
+    },
+    {
+      "id": "fkbook/new-to-lua/17-if.rst#Lua:-if语句",
+      "file": "fkbook/new-to-lua/17-if.rst",
+      "line": 1,
+      "endLine": 318,
+      "level": 1,
+      "title": "Lua: if语句",
+      "path": [],
+      "chars": 5880
+    },
+    {
+      "id": "fkbook/new-to-lua/17-if.rst#条件测试",
+      "file": "fkbook/new-to-lua/17-if.rst",
+      "line": 22,
+      "endLine": 154,
+      "level": 2,
+      "title": "条件测试",
+      "path": [
+        "Lua: if语句"
+      ],
+      "chars": 2531
+    },
+    {
+      "id": "fkbook/new-to-lua/17-if.rst#检查是否相等",
+      "file": "fkbook/new-to-lua/17-if.rst",
+      "line": 32,
+      "endLine": 59,
+      "level": 3,
+      "title": "检查是否相等",
+      "path": [
+        "Lua: if语句",
+        "条件测试"
+      ],
+      "chars": 510
+    },
+    {
+      "id": "fkbook/new-to-lua/17-if.rst#检查是否不相等",
+      "file": "fkbook/new-to-lua/17-if.rst",
+      "line": 59,
+      "endLine": 81,
+      "level": 3,
+      "title": "检查是否不相等",
+      "path": [
+        "Lua: if语句",
+        "条件测试"
+      ],
+      "chars": 409
+    },
+    {
+      "id": "fkbook/new-to-lua/17-if.rst#和数字有关的比较",
+      "file": "fkbook/new-to-lua/17-if.rst",
+      "line": 81,
+      "endLine": 98,
+      "level": 3,
+      "title": "和数字有关的比较",
+      "path": [
+        "Lua: if语句",
+        "条件测试"
+      ],
+      "chars": 317
+    },
+    {
+      "id": "fkbook/new-to-lua/17-if.rst#检查多个条件",
+      "file": "fkbook/new-to-lua/17-if.rst",
+      "line": 98,
+      "endLine": 139,
+      "level": 3,
+      "title": "检查多个条件",
+      "path": [
+        "Lua: if语句",
+        "条件测试"
+      ],
+      "chars": 809
+    },
+    {
+      "id": "fkbook/new-to-lua/17-if.rst#使用and检查多个条件",
+      "file": "fkbook/new-to-lua/17-if.rst",
+      "line": 105,
+      "endLine": 124,
+      "level": 4,
+      "title": "使用and检查多个条件",
+      "path": [
+        "Lua: if语句",
+        "条件测试",
+        "检查多个条件"
+      ],
+      "chars": 386
+    },
+    {
+      "id": "fkbook/new-to-lua/17-if.rst#使用or检查多个条件",
+      "file": "fkbook/new-to-lua/17-if.rst",
+      "line": 124,
+      "endLine": 139,
+      "level": 4,
+      "title": "使用or检查多个条件",
+      "path": [
+        "Lua: if语句",
+        "条件测试",
+        "检查多个条件"
+      ],
+      "chars": 279
+    },
+    {
+      "id": "fkbook/new-to-lua/17-if.rst#布尔表达式",
+      "file": "fkbook/new-to-lua/17-if.rst",
+      "line": 139,
+      "endLine": 154,
+      "level": 3,
+      "title": "布尔表达式",
+      "path": [
+        "Lua: if语句",
+        "条件测试"
+      ],
+      "chars": 238
+    },
+    {
+      "id": "fkbook/new-to-lua/17-if.rst#if语句",
+      "file": "fkbook/new-to-lua/17-if.rst",
+      "line": 154,
+      "endLine": 306,
+      "level": 2,
+      "title": "if语句",
+      "path": [
+        "Lua: if语句"
+      ],
+      "chars": 2753
+    },
+    {
+      "id": "fkbook/new-to-lua/17-if.rst#简单if语句",
+      "file": "fkbook/new-to-lua/17-if.rst",
+      "line": 161,
+      "endLine": 208,
+      "level": 3,
+      "title": "简单if语句",
+      "path": [
+        "Lua: if语句",
+        "if语句"
+      ],
+      "chars": 819
+    },
+    {
+      "id": "fkbook/new-to-lua/17-if.rst#if-else语句",
+      "file": "fkbook/new-to-lua/17-if.rst",
+      "line": 208,
+      "endLine": 239,
+      "level": 3,
+      "title": "if-else语句",
+      "path": [
+        "Lua: if语句",
+        "if语句"
+      ],
+      "chars": 534
+    },
+    {
+      "id": "fkbook/new-to-lua/17-if.rst#if-elseif-else结构",
+      "file": "fkbook/new-to-lua/17-if.rst",
+      "line": 239,
+      "endLine": 306,
+      "level": 3,
+      "title": "if-elseif-else结构",
+      "path": [
+        "Lua: if语句",
+        "if语句"
+      ],
+      "chars": 1298
+    },
+    {
+      "id": "fkbook/new-to-lua/17-if.rst#关于if语句的格式",
+      "file": "fkbook/new-to-lua/17-if.rst",
+      "line": 306,
+      "endLine": 318,
+      "level": 2,
+      "title": "关于if语句的格式",
+      "path": [
+        "Lua: if语句"
+      ],
+      "chars": 262
+    },
+    {
+      "id": "fkbook/new-to-lua/18-list.rst#Lua：列表",
+      "file": "fkbook/new-to-lua/18-list.rst",
+      "line": 1,
+      "endLine": 188,
+      "level": 1,
+      "title": "Lua：列表",
+      "path": [],
+      "chars": 3763
+    },
+    {
+      "id": "fkbook/new-to-lua/18-list.rst#访问列表元素",
+      "file": "fkbook/new-to-lua/18-list.rst",
+      "line": 27,
+      "endLine": 60,
+      "level": 2,
+      "title": "访问列表元素",
+      "path": [
+        "Lua：列表"
+      ],
+      "chars": 682
+    },
+    {
+      "id": "fkbook/new-to-lua/18-list.rst#修改、添加和删除元素",
+      "file": "fkbook/new-to-lua/18-list.rst",
+      "line": 60,
+      "endLine": 188,
+      "level": 2,
+      "title": "修改、添加和删除元素",
+      "path": [
+        "Lua：列表"
+      ],
+      "chars": 2614
+    },
+    {
+      "id": "fkbook/new-to-lua/18-list.rst#修改列表元素",
+      "file": "fkbook/new-to-lua/18-list.rst",
+      "line": 66,
+      "endLine": 82,
+      "level": 3,
+      "title": "修改列表元素",
+      "path": [
+        "Lua：列表",
+        "修改、添加和删除元素"
+      ],
+      "chars": 274
+    },
+    {
+      "id": "fkbook/new-to-lua/18-list.rst#往列表添加元素",
+      "file": "fkbook/new-to-lua/18-list.rst",
+      "line": 82,
+      "endLine": 136,
+      "level": 3,
+      "title": "往列表添加元素",
+      "path": [
+        "Lua：列表",
+        "修改、添加和删除元素"
+      ],
+      "chars": 1171
+    },
+    {
+      "id": "fkbook/new-to-lua/18-list.rst#在列表末尾添加元素",
+      "file": "fkbook/new-to-lua/18-list.rst",
+      "line": 85,
+      "endLine": 117,
+      "level": 4,
+      "title": "在列表末尾添加元素",
+      "path": [
+        "Lua：列表",
+        "修改、添加和删除元素",
+        "往列表添加元素"
+      ],
+      "chars": 768
+    },
+    {
+      "id": "fkbook/new-to-lua/18-list.rst#在列表中间添加元素",
+      "file": "fkbook/new-to-lua/18-list.rst",
+      "line": 117,
+      "endLine": 136,
+      "level": 4,
+      "title": "在列表中间添加元素",
+      "path": [
+        "Lua：列表",
+        "修改、添加和删除元素",
+        "往列表添加元素"
+      ],
+      "chars": 377
+    },
+    {
+      "id": "fkbook/new-to-lua/18-list.rst#从列表中删除元素",
+      "file": "fkbook/new-to-lua/18-list.rst",
+      "line": 136,
+      "endLine": 188,
+      "level": 3,
+      "title": "从列表中删除元素",
+      "path": [
+        "Lua：列表",
+        "修改、添加和删除元素"
+      ],
+      "chars": 1057
+    },
+    {
+      "id": "fkbook/new-to-lua/18-list.rst#在列表末尾删除元素",
+      "file": "fkbook/new-to-lua/18-list.rst",
+      "line": 139,
+      "endLine": 153,
+      "level": 4,
+      "title": "在列表末尾删除元素",
+      "path": [
+        "Lua：列表",
+        "修改、添加和删除元素",
+        "从列表中删除元素"
+      ],
+      "chars": 298
+    },
+    {
+      "id": "fkbook/new-to-lua/18-list.rst#确定列表的长度",
+      "file": "fkbook/new-to-lua/18-list.rst",
+      "line": 153,
+      "endLine": 168,
+      "level": 4,
+      "title": "确定列表的长度",
+      "path": [
+        "Lua：列表",
+        "修改、添加和删除元素",
+        "从列表中删除元素"
+      ],
+      "chars": 288
+    },
+    {
+      "id": "fkbook/new-to-lua/18-list.rst#删除任意位置的元素",
+      "file": "fkbook/new-to-lua/18-list.rst",
+      "line": 168,
+      "endLine": 188,
+      "level": 4,
+      "title": "删除任意位置的元素",
+      "path": [
+        "Lua：列表",
+        "修改、添加和删除元素",
+        "从列表中删除元素"
+      ],
+      "chars": 441
+    },
+    {
+      "id": "fkbook/new-to-lua/19-loop.rst#Lua：循环",
+      "file": "fkbook/new-to-lua/19-loop.rst",
+      "line": 1,
+      "endLine": 168,
+      "level": 1,
+      "title": "Lua：循环",
+      "path": [],
+      "chars": 3920
+    },
+    {
+      "id": "fkbook/new-to-lua/19-loop.rst#遍历一个列表",
+      "file": "fkbook/new-to-lua/19-loop.rst",
+      "line": 7,
+      "endLine": 99,
+      "level": 2,
+      "title": "遍历一个列表",
+      "path": [
+        "Lua：循环"
+      ],
+      "chars": 2270
+    },
+    {
+      "id": "fkbook/new-to-lua/19-loop.rst#在遍历列表中执行一些特殊的操作",
+      "file": "fkbook/new-to-lua/19-loop.rst",
+      "line": 45,
+      "endLine": 73,
+      "level": 3,
+      "title": "在遍历列表中执行一些特殊的操作",
+      "path": [
+        "Lua：循环",
+        "遍历一个列表"
+      ],
+      "chars": 689
+    },
+    {
+      "id": "fkbook/new-to-lua/19-loop.rst#使用break中途退出循环",
+      "file": "fkbook/new-to-lua/19-loop.rst",
+      "line": 73,
+      "endLine": 99,
+      "level": 3,
+      "title": "使用break中途退出循环",
+      "path": [
+        "Lua：循环",
+        "遍历一个列表"
+      ],
+      "chars": 553
+    },
+    {
+      "id": "fkbook/new-to-lua/19-loop.rst#while循环简介",
+      "file": "fkbook/new-to-lua/19-loop.rst",
+      "line": 99,
+      "endLine": 130,
+      "level": 2,
+      "title": "while循环简介",
+      "path": [
+        "Lua：循环"
+      ],
+      "chars": 624
+    },
+    {
+      "id": "fkbook/new-to-lua/19-loop.rst#操练：使用while来遍历列表",
+      "file": "fkbook/new-to-lua/19-loop.rst",
+      "line": 130,
+      "endLine": 168,
+      "level": 2,
+      "title": "操练：使用while来遍历列表",
+      "path": [
+        "Lua：循环"
+      ],
+      "chars": 944
+    },
+    {
+      "id": "fkbook/new-to-lua/20-table.rst#Lua：表",
+      "file": "fkbook/new-to-lua/20-table.rst",
+      "line": 1,
+      "endLine": 108,
+      "level": 1,
+      "title": "Lua：表",
+      "path": [],
+      "chars": 2177
+    },
+    {
+      "id": "fkbook/new-to-lua/20-table.rst#表的构造和访问",
+      "file": "fkbook/new-to-lua/20-table.rst",
+      "line": 22,
+      "endLine": 108,
+      "level": 2,
+      "title": "表的构造和访问",
+      "path": [
+        "Lua：表"
+      ],
+      "chars": 1790
+    },
+    {
+      "id": "fkbook/new-to-lua/20-table.rst#添加键值对",
+      "file": "fkbook/new-to-lua/20-table.rst",
+      "line": 35,
+      "endLine": 58,
+      "level": 3,
+      "title": "添加键值对",
+      "path": [
+        "Lua：表",
+        "表的构造和访问"
+      ],
+      "chars": 390
+    },
+    {
+      "id": "fkbook/new-to-lua/20-table.rst#空表与删除键值对",
+      "file": "fkbook/new-to-lua/20-table.rst",
+      "line": 58,
+      "endLine": 93,
+      "level": 3,
+      "title": "空表与删除键值对",
+      "path": [
+        "Lua：表",
+        "表的构造和访问"
+      ],
+      "chars": 772
+    },
+    {
+      "id": "fkbook/new-to-lua/20-table.rst#遍历键值对",
+      "file": "fkbook/new-to-lua/20-table.rst",
+      "line": 93,
+      "endLine": 108,
+      "level": 3,
+      "title": "遍历键值对",
+      "path": [
+        "Lua：表",
+        "表的构造和访问"
+      ],
+      "chars": 312
+    },
+    {
+      "id": "fkbook/new-to-lua/21-func.rst#Lua：函数",
+      "file": "fkbook/new-to-lua/21-func.rst",
+      "line": 1,
+      "endLine": 319,
+      "level": 1,
+      "title": "Lua：函数",
+      "path": [],
+      "chars": 6764
+    },
+    {
+      "id": "fkbook/new-to-lua/21-func.rst#定义函数",
+      "file": "fkbook/new-to-lua/21-func.rst",
+      "line": 6,
+      "endLine": 71,
+      "level": 2,
+      "title": "定义函数",
+      "path": [
+        "Lua：函数"
+      ],
+      "chars": 1427
+    },
+    {
+      "id": "fkbook/new-to-lua/21-func.rst#向函数传递信息",
+      "file": "fkbook/new-to-lua/21-func.rst",
+      "line": 36,
+      "endLine": 55,
+      "level": 3,
+      "title": "向函数传递信息",
+      "path": [
+        "Lua：函数",
+        "定义函数"
+      ],
+      "chars": 433
+    },
+    {
+      "id": "fkbook/new-to-lua/21-func.rst#实参与形参",
+      "file": "fkbook/new-to-lua/21-func.rst",
+      "line": 55,
+      "endLine": 71,
+      "level": 3,
+      "title": "实参与形参",
+      "path": [
+        "Lua：函数",
+        "定义函数"
+      ],
+      "chars": 373
+    },
+    {
+      "id": "fkbook/new-to-lua/21-func.rst#传递实参",
+      "file": "fkbook/new-to-lua/21-func.rst",
+      "line": 71,
+      "endLine": 179,
+      "level": 2,
+      "title": "传递实参",
+      "path": [
+        "Lua：函数"
+      ],
+      "chars": 2495
+    },
+    {
+      "id": "fkbook/new-to-lua/21-func.rst#位置实参",
+      "file": "fkbook/new-to-lua/21-func.rst",
+      "line": 77,
+      "endLine": 112,
+      "level": 3,
+      "title": "位置实参",
+      "path": [
+        "Lua：函数",
+        "传递实参"
+      ],
+      "chars": 848
+    },
+    {
+      "id": "fkbook/new-to-lua/21-func.rst#可选实参",
+      "file": "fkbook/new-to-lua/21-func.rst",
+      "line": 112,
+      "endLine": 139,
+      "level": 3,
+      "title": "可选实参",
+      "path": [
+        "Lua：函数",
+        "传递实参"
+      ],
+      "chars": 599
+    },
+    {
+      "id": "fkbook/new-to-lua/21-func.rst#可变参数",
+      "file": "fkbook/new-to-lua/21-func.rst",
+      "line": 139,
+      "endLine": 179,
+      "level": 3,
+      "title": "可变参数",
+      "path": [
+        "Lua：函数",
+        "传递实参"
+      ],
+      "chars": 953
+    },
+    {
+      "id": "fkbook/new-to-lua/21-func.rst#返回值",
+      "file": "fkbook/new-to-lua/21-func.rst",
+      "line": 179,
+      "endLine": 278,
+      "level": 2,
+      "title": "返回值",
+      "path": [
+        "Lua：函数"
+      ],
+      "chars": 1834
+    },
+    {
+      "id": "fkbook/new-to-lua/21-func.rst#无返回值",
+      "file": "fkbook/new-to-lua/21-func.rst",
+      "line": 187,
+      "endLine": 213,
+      "level": 3,
+      "title": "无返回值",
+      "path": [
+        "Lua：函数",
+        "返回值"
+      ],
+      "chars": 588
+    },
+    {
+      "id": "fkbook/new-to-lua/21-func.rst#有返回值",
+      "file": "fkbook/new-to-lua/21-func.rst",
+      "line": 213,
+      "endLine": 278,
+      "level": 3,
+      "title": "有返回值",
+      "path": [
+        "Lua：函数",
+        "返回值"
+      ],
+      "chars": 1156
+    },
+    {
+      "id": "fkbook/new-to-lua/21-func.rst#函数的调用方式",
+      "file": "fkbook/new-to-lua/21-func.rst",
+      "line": 278,
+      "endLine": 319,
+      "level": 2,
+      "title": "函数的调用方式",
+      "path": [
+        "Lua：函数"
+      ],
+      "chars": 944
+    },
+    {
+      "id": "fkbook/new-to-lua/index.rst#写给初次接触Lua语言的玩家",
+      "file": "fkbook/new-to-lua/index.rst",
+      "line": 3,
+      "endLine": 17,
+      "level": 1,
+      "title": "写给初次接触Lua语言的玩家",
+      "path": [],
+      "chars": 188
+    },
+    {
+      "id": "fkbook/new-to-lua/studylua/func.lua#func",
+      "file": "fkbook/new-to-lua/studylua/func.lua",
+      "line": 1,
+      "endLine": 7,
+      "level": 1,
+      "title": "func",
+      "path": [
+        "new-to-lua",
+        "studylua"
+      ],
+      "chars": 92
+    },
+    {
+      "id": "fkbook/new-to-lua/studylua/hello.lua#hello",
+      "file": "fkbook/new-to-lua/studylua/hello.lua",
+      "line": 1,
+      "endLine": 7,
+      "level": 1,
+      "title": "hello",
+      "path": [
+        "new-to-lua",
+        "studylua"
+      ],
+      "chars": 80
+    },
+    {
+      "id": "fkbook/new-to-lua/studylua/if.lua#if",
+      "file": "fkbook/new-to-lua/studylua/if.lua",
+      "line": 1,
+      "endLine": 38,
+      "level": 1,
+      "title": "if",
+      "path": [
+        "new-to-lua",
+        "studylua"
+      ],
+      "chars": 589
+    },
+    {
+      "id": "fkbook/new-to-lua/studylua/loop.lua#loop",
+      "file": "fkbook/new-to-lua/studylua/loop.lua",
+      "line": 1,
+      "endLine": 11,
+      "level": 1,
+      "title": "loop",
+      "path": [
+        "new-to-lua",
+        "studylua"
+      ],
+      "chars": 234
+    },
+    {
+      "id": "fkbook/rule/01-skill.rst#技能及其生效事件",
+      "file": "fkbook/rule/01-skill.rst",
+      "line": 1,
+      "endLine": 53,
+      "level": 1,
+      "title": "技能及其生效事件",
+      "path": [],
+      "chars": 763
+    },
+    {
+      "id": "fkbook/rule/01-skill.rst#触发技使用前",
+      "file": "fkbook/rule/01-skill.rst",
+      "line": 39,
+      "endLine": 53,
+      "level": 2,
+      "title": "触发技使用前",
+      "path": [
+        "技能及其生效事件"
+      ],
+      "chars": 143
+    },
+    {
+      "id": "fkbook/rule/02-skel.rst#技能本体与技能效果",
+      "file": "fkbook/rule/02-skel.rst",
+      "line": 1,
+      "endLine": 51,
+      "level": 1,
+      "title": "技能本体与技能效果",
+      "path": [],
+      "chars": 1027
+    },
+    {
+      "id": "fkbook/rule/02-skel.rst#技能标签",
+      "file": "fkbook/rule/02-skel.rst",
+      "line": 26,
+      "endLine": 51,
+      "level": 2,
+      "title": "技能标签",
+      "path": [
+        "技能本体与技能效果"
+      ],
+      "chars": 586
+    },
+    {
+      "id": "fkbook/rule/02-skel.rst#技能的次数限制",
+      "file": "fkbook/rule/02-skel.rst",
+      "line": 51,
+      "endLine": 194,
+      "level": 1,
+      "title": "技能的次数限制",
+      "path": [],
+      "chars": 3650
+    },
+    {
+      "id": "fkbook/rule/02-skel.rst#四个时段",
+      "file": "fkbook/rule/02-skel.rst",
+      "line": 58,
+      "endLine": 82,
+      "level": 2,
+      "title": "四个时段",
+      "path": [
+        "技能的次数限制"
+      ],
+      "chars": 428
+    },
+    {
+      "id": "fkbook/rule/02-skel.rst#定义技能的次数限制",
+      "file": "fkbook/rule/02-skel.rst",
+      "line": 82,
+      "endLine": 101,
+      "level": 2,
+      "title": "定义技能的次数限制",
+      "path": [
+        "技能的次数限制"
+      ],
+      "chars": 433
+    },
+    {
+      "id": "fkbook/rule/02-skel.rst#次数检测",
+      "file": "fkbook/rule/02-skel.rst",
+      "line": 101,
+      "endLine": 147,
+      "level": 2,
+      "title": "次数检测",
+      "path": [
+        "技能的次数限制"
+      ],
+      "chars": 1316
+    },
+    {
+      "id": "fkbook/rule/02-skel.rst#与次数上限比较",
+      "file": "fkbook/rule/02-skel.rst",
+      "line": 112,
+      "endLine": 126,
+      "level": 3,
+      "title": "与次数上限比较",
+      "path": [
+        "技能的次数限制",
+        "次数检测"
+      ],
+      "chars": 472
+    },
+    {
+      "id": "fkbook/rule/02-skel.rst#自动检测",
+      "file": "fkbook/rule/02-skel.rst",
+      "line": 126,
+      "endLine": 147,
+      "level": 3,
+      "title": "自动检测",
+      "path": [
+        "技能的次数限制",
+        "次数检测"
+      ],
+      "chars": 547
+    },
+    {
+      "id": "fkbook/rule/02-skel.rst#延迟效果",
+      "file": "fkbook/rule/02-skel.rst",
+      "line": 147,
+      "endLine": 157,
+      "level": 2,
+      "title": "延迟效果",
+      "path": [
+        "技能的次数限制"
+      ],
+      "chars": 260
+    },
+    {
+      "id": "fkbook/rule/02-skel.rst#技能分支",
+      "file": "fkbook/rule/02-skel.rst",
+      "line": 157,
+      "endLine": 194,
+      "level": 2,
+      "title": "技能分支",
+      "path": [
+        "技能的次数限制"
+      ],
+      "chars": 1059
+    },
+    {
+      "id": "fkbook/rule/03-event.rst#事件与时机",
+      "file": "fkbook/rule/03-event.rst",
+      "line": 1,
+      "endLine": 103,
+      "level": 1,
+      "title": "事件与时机",
+      "path": [],
+      "chars": 1578
+    },
+    {
+      "id": "fkbook/rule/03-event.rst#事件的结算流程",
+      "file": "fkbook/rule/03-event.rst",
+      "line": 6,
+      "endLine": 71,
+      "level": 2,
+      "title": "事件的结算流程",
+      "path": [
+        "事件与时机"
+      ],
+      "chars": 985
+    },
+    {
+      "id": "fkbook/rule/03-event.rst#关于插入结算",
+      "file": "fkbook/rule/03-event.rst",
+      "line": 18,
+      "endLine": 58,
+      "level": 3,
+      "title": "关于插入结算",
+      "path": [
+        "事件与时机",
+        "事件的结算流程"
+      ],
+      "chars": 597
+    },
+    {
+      "id": "fkbook/rule/03-event.rst#关于终止一切结算",
+      "file": "fkbook/rule/03-event.rst",
+      "line": 58,
+      "endLine": 71,
+      "level": 3,
+      "title": "关于终止一切结算",
+      "path": [
+        "事件与时机",
+        "事件的结算流程"
+      ],
+      "chars": 186
+    },
+    {
+      "id": "fkbook/rule/03-event.rst#触发时机的结算流程",
+      "file": "fkbook/rule/03-event.rst",
+      "line": 71,
+      "endLine": 103,
+      "level": 2,
+      "title": "触发时机的结算流程",
+      "path": [
+        "事件与时机"
+      ],
+      "chars": 545
+    },
+    {
+      "id": "fkbook/rule/04-movecard.rst#移动牌",
+      "file": "fkbook/rule/04-movecard.rst",
+      "line": 1,
+      "endLine": 80,
+      "level": 1,
+      "title": "移动牌",
+      "path": [],
+      "chars": 1146
+    },
+    {
+      "id": "fkbook/rule/04-movecard.rst#移牌信息",
+      "file": "fkbook/rule/04-movecard.rst",
+      "line": 11,
+      "endLine": 38,
+      "level": 2,
+      "title": "移牌信息",
+      "path": [
+        "移动牌"
+      ],
+      "chars": 347
+    },
+    {
+      "id": "fkbook/rule/04-movecard.rst#移牌的流程",
+      "file": "fkbook/rule/04-movecard.rst",
+      "line": 38,
+      "endLine": 65,
+      "level": 2,
+      "title": "移牌的流程",
+      "path": [
+        "移动牌"
+      ],
+      "chars": 449
+    },
+    {
+      "id": "fkbook/rule/04-movecard.rst#摸牌流程",
+      "file": "fkbook/rule/04-movecard.rst",
+      "line": 65,
+      "endLine": 80,
+      "level": 2,
+      "title": "摸牌流程",
+      "path": [
+        "移动牌"
+      ],
+      "chars": 214
+    },
+    {
+      "id": "fkbook/rule/05-gameflow.rst#游戏流程相关",
+      "file": "fkbook/rule/05-gameflow.rst",
+      "line": 1,
+      "endLine": 211,
+      "level": 1,
+      "title": "游戏流程相关",
+      "path": [],
+      "chars": 3624
+    },
+    {
+      "id": "fkbook/rule/05-gameflow.rst#游戏开始之前",
+      "file": "fkbook/rule/05-gameflow.rst",
+      "line": 7,
+      "endLine": 29,
+      "level": 2,
+      "title": "游戏开始之前",
+      "path": [
+        "游戏流程相关"
+      ],
+      "chars": 341
+    },
+    {
+      "id": "fkbook/rule/05-gameflow.rst#分发初始手牌",
+      "file": "fkbook/rule/05-gameflow.rst",
+      "line": 29,
+      "endLine": 50,
+      "level": 2,
+      "title": "分发初始手牌",
+      "path": [
+        "游戏流程相关"
+      ],
+      "chars": 374
+    },
+    {
+      "id": "fkbook/rule/05-gameflow.rst#轮次事件",
+      "file": "fkbook/rule/05-gameflow.rst",
+      "line": 50,
+      "endLine": 86,
+      "level": 2,
+      "title": "轮次事件",
+      "path": [
+        "游戏流程相关"
+      ],
+      "chars": 555
+    },
+    {
+      "id": "fkbook/rule/05-gameflow.rst#回合事件",
+      "file": "fkbook/rule/05-gameflow.rst",
+      "line": 86,
+      "endLine": 157,
+      "level": 2,
+      "title": "回合事件",
+      "path": [
+        "游戏流程相关"
+      ],
+      "chars": 1349
+    },
+    {
+      "id": "fkbook/rule/05-gameflow.rst#阶段事件",
+      "file": "fkbook/rule/05-gameflow.rst",
+      "line": 157,
+      "endLine": 199,
+      "level": 2,
+      "title": "阶段事件",
+      "path": [
+        "游戏流程相关"
+      ],
+      "chars": 793
+    },
+    {
+      "id": "fkbook/rule/05-gameflow.rst#游戏结束",
+      "file": "fkbook/rule/05-gameflow.rst",
+      "line": 199,
+      "endLine": 211,
+      "level": 2,
+      "title": "游戏结束",
+      "path": [
+        "游戏流程相关"
+      ],
+      "chars": 125
+    },
+    {
+      "id": "fkbook/rule/06-use-response.rst#使用与打出",
+      "file": "fkbook/rule/06-use-response.rst",
+      "line": 1,
+      "endLine": 176,
+      "level": 1,
+      "title": "使用与打出",
+      "path": [],
+      "chars": 2845
+    },
+    {
+      "id": "fkbook/rule/06-use-response.rst#使用牌事件",
+      "file": "fkbook/rule/06-use-response.rst",
+      "line": 4,
+      "endLine": 88,
+      "level": 2,
+      "title": "使用牌事件",
+      "path": [
+        "使用与打出"
+      ],
+      "chars": 1330
+    },
+    {
+      "id": "fkbook/rule/06-use-response.rst#卡牌生效事件",
+      "file": "fkbook/rule/06-use-response.rst",
+      "line": 88,
+      "endLine": 123,
+      "level": 2,
+      "title": "卡牌生效事件",
+      "path": [
+        "使用与打出"
+      ],
+      "chars": 674
+    },
+    {
+      "id": "fkbook/rule/06-use-response.rst#打出牌事件",
+      "file": "fkbook/rule/06-use-response.rst",
+      "line": 123,
+      "endLine": 149,
+      "level": 2,
+      "title": "打出牌事件",
+      "path": [
+        "使用与打出"
+      ],
+      "chars": 372
+    },
+    {
+      "id": "fkbook/rule/06-use-response.rst#询问卡牌的使用或者打出",
+      "file": "fkbook/rule/06-use-response.rst",
+      "line": 149,
+      "endLine": 176,
+      "level": 2,
+      "title": "询问卡牌的使用或者打出",
+      "path": [
+        "使用与打出"
+      ],
+      "chars": 445
+    },
+    {
+      "id": "fkbook/rule/07-hp.rst#体力值相关事件",
+      "file": "fkbook/rule/07-hp.rst",
+      "line": 1,
+      "endLine": 169,
+      "level": 1,
+      "title": "体力值相关事件",
+      "path": [],
+      "chars": 2958
+    },
+    {
+      "id": "fkbook/rule/07-hp.rst#体力值变化事件",
+      "file": "fkbook/rule/07-hp.rst",
+      "line": 4,
+      "endLine": 44,
+      "level": 2,
+      "title": "体力值变化事件",
+      "path": [
+        "体力值相关事件"
+      ],
+      "chars": 797
+    },
+    {
+      "id": "fkbook/rule/07-hp.rst#体力上限变化事件",
+      "file": "fkbook/rule/07-hp.rst",
+      "line": 44,
+      "endLine": 65,
+      "level": 2,
+      "title": "体力上限变化事件",
+      "path": [
+        "体力值相关事件"
+      ],
+      "chars": 361
+    },
+    {
+      "id": "fkbook/rule/07-hp.rst#失去体力事件",
+      "file": "fkbook/rule/07-hp.rst",
+      "line": 65,
+      "endLine": 88,
+      "level": 2,
+      "title": "失去体力事件",
+      "path": [
+        "体力值相关事件"
+      ],
+      "chars": 359
+    },
+    {
+      "id": "fkbook/rule/07-hp.rst#回复体力事件",
+      "file": "fkbook/rule/07-hp.rst",
+      "line": 88,
+      "endLine": 112,
+      "level": 2,
+      "title": "回复体力事件",
+      "path": [
+        "体力值相关事件"
+      ],
+      "chars": 360
+    },
+    {
+      "id": "fkbook/rule/07-hp.rst#伤害事件",
+      "file": "fkbook/rule/07-hp.rst",
+      "line": 112,
+      "endLine": 169,
+      "level": 2,
+      "title": "伤害事件",
+      "path": [
+        "体力值相关事件"
+      ],
+      "chars": 1051
+    },
+    {
+      "id": "fkbook/rule/08-death.rst#濒死与死亡",
+      "file": "fkbook/rule/08-death.rst",
+      "line": 1,
+      "endLine": 71,
+      "level": 1,
+      "title": "濒死与死亡",
+      "path": [],
+      "chars": 836
+    },
+    {
+      "id": "fkbook/rule/08-death.rst#濒死",
+      "file": "fkbook/rule/08-death.rst",
+      "line": 4,
+      "endLine": 32,
+      "level": 2,
+      "title": "濒死",
+      "path": [
+        "濒死与死亡"
+      ],
+      "chars": 355
+    },
+    {
+      "id": "fkbook/rule/08-death.rst#死亡",
+      "file": "fkbook/rule/08-death.rst",
+      "line": 32,
+      "endLine": 61,
+      "level": 2,
+      "title": "死亡",
+      "path": [
+        "濒死与死亡"
+      ],
+      "chars": 342
+    },
+    {
+      "id": "fkbook/rule/08-death.rst#复活",
+      "file": "fkbook/rule/08-death.rst",
+      "line": 61,
+      "endLine": 71,
+      "level": 2,
+      "title": "复活",
+      "path": [
+        "濒死与死亡"
+      ],
+      "chars": 117
+    },
+    {
+      "id": "fkbook/rule/09-judge.rst#判定与拼点",
+      "file": "fkbook/rule/09-judge.rst",
+      "line": 1,
+      "endLine": 109,
+      "level": 1,
+      "title": "判定与拼点",
+      "path": [],
+      "chars": 1587
+    },
+    {
+      "id": "fkbook/rule/09-judge.rst#判定",
+      "file": "fkbook/rule/09-judge.rst",
+      "line": 4,
+      "endLine": 40,
+      "level": 2,
+      "title": "判定",
+      "path": [
+        "判定与拼点"
+      ],
+      "chars": 537
+    },
+    {
+      "id": "fkbook/rule/09-judge.rst#改判",
+      "file": "fkbook/rule/09-judge.rst",
+      "line": 40,
+      "endLine": 62,
+      "level": 2,
+      "title": "改判",
+      "path": [
+        "判定与拼点"
+      ],
+      "chars": 273
+    },
+    {
+      "id": "fkbook/rule/09-judge.rst#拼点",
+      "file": "fkbook/rule/09-judge.rst",
+      "line": 62,
+      "endLine": 109,
+      "level": 2,
+      "title": "拼点",
+      "path": [
+        "判定与拼点"
+      ],
+      "chars": 756
+    },
+    {
+      "id": "fkbook/rule/10-property.rst#特殊状态改变",
+      "file": "fkbook/rule/10-property.rst",
+      "line": 1,
+      "endLine": 180,
+      "level": 1,
+      "title": "特殊状态改变",
+      "path": [],
+      "chars": 2117
+    },
+    {
+      "id": "fkbook/rule/10-property.rst#属性值变化",
+      "file": "fkbook/rule/10-property.rst",
+      "line": 4,
+      "endLine": 41,
+      "level": 2,
+      "title": "属性值变化",
+      "path": [
+        "特殊状态改变"
+      ],
+      "chars": 571
+    },
+    {
+      "id": "fkbook/rule/10-property.rst#翻面",
+      "file": "fkbook/rule/10-property.rst",
+      "line": 41,
+      "endLine": 64,
+      "level": 2,
+      "title": "翻面",
+      "path": [
+        "特殊状态改变"
+      ],
+      "chars": 327
+    },
+    {
+      "id": "fkbook/rule/10-property.rst#连环",
+      "file": "fkbook/rule/10-property.rst",
+      "line": 64,
+      "endLine": 90,
+      "level": 2,
+      "title": "连环",
+      "path": [
+        "特殊状态改变"
+      ],
+      "chars": 304
+    },
+    {
+      "id": "fkbook/rule/10-property.rst#洗牌",
+      "file": "fkbook/rule/10-property.rst",
+      "line": 90,
+      "endLine": 101,
+      "level": 2,
+      "title": "洗牌",
+      "path": [
+        "特殊状态改变"
+      ],
+      "chars": 82
+    },
+    {
+      "id": "fkbook/rule/10-property.rst#RequestAsk",
+      "file": "fkbook/rule/10-property.rst",
+      "line": 101,
+      "endLine": 120,
+      "level": 2,
+      "title": "RequestAsk",
+      "path": [
+        "特殊状态改变"
+      ],
+      "chars": 218
+    },
+    {
+      "id": "fkbook/rule/10-property.rst#卡牌展示",
+      "file": "fkbook/rule/10-property.rst",
+      "line": 120,
+      "endLine": 136,
+      "level": 2,
+      "title": "卡牌展示",
+      "path": [
+        "特殊状态改变"
+      ],
+      "chars": 116
+    },
+    {
+      "id": "fkbook/rule/10-property.rst#区域变化",
+      "file": "fkbook/rule/10-property.rst",
+      "line": 136,
+      "endLine": 155,
+      "level": 2,
+      "title": "区域变化",
+      "path": [
+        "特殊状态改变"
+      ],
+      "chars": 180
+    },
+    {
+      "id": "fkbook/rule/10-property.rst#武将牌明置或暗置",
+      "file": "fkbook/rule/10-property.rst",
+      "line": 155,
+      "endLine": 180,
+      "level": 2,
+      "title": "武将牌明置或暗置",
+      "path": [
+        "特殊状态改变"
+      ],
+      "chars": 292
+    },
+    {
+      "id": "fkbook/rule/faq.rst#常见村规结算一览",
+      "file": "fkbook/rule/faq.rst",
+      "line": 1,
+      "endLine": 18,
+      "level": 1,
+      "title": "常见村规结算一览",
+      "path": [],
+      "chars": 250
+    },
+    {
+      "id": "fkbook/rule/faq.rst#飞刀",
+      "file": "fkbook/rule/faq.rst",
+      "line": 7,
+      "endLine": 18,
+      "level": 2,
+      "title": "飞刀",
+      "path": [
+        "常见村规结算一览"
+      ],
+      "chars": 173
+    },
+    {
+      "id": "fkbook/rule/index.rst#新月杀结算说明",
+      "file": "fkbook/rule/index.rst",
+      "line": 3,
+      "endLine": 154,
+      "level": 1,
+      "title": "新月杀结算说明",
+      "path": [],
+      "chars": 2943
+    },
+    {
+      "id": "fkbook/rule/index.rst#结算的描述方式",
+      "file": "fkbook/rule/index.rst",
+      "line": 11,
+      "endLine": 21,
+      "level": 2,
+      "title": "结算的描述方式",
+      "path": [
+        "新月杀结算说明"
+      ],
+      "chars": 206
+    },
+    {
+      "id": "fkbook/rule/index.rst#技能的分类",
+      "file": "fkbook/rule/index.rst",
+      "line": 21,
+      "endLine": 37,
+      "level": 2,
+      "title": "技能的分类",
+      "path": [
+        "新月杀结算说明"
+      ],
+      "chars": 216
+    },
+    {
+      "id": "fkbook/rule/index.rst#游戏用语",
+      "file": "fkbook/rule/index.rst",
+      "line": 37,
+      "endLine": 154,
+      "level": 2,
+      "title": "游戏用语",
+      "path": [
+        "新月杀结算说明"
+      ],
+      "chars": 2411
+    },
+    {
+      "id": "fkbook/rule/index.rst#本文会使用的特殊用语",
+      "file": "fkbook/rule/index.rst",
+      "line": 40,
+      "endLine": 55,
+      "level": 3,
+      "title": "本文会使用的特殊用语",
+      "path": [
+        "新月杀结算说明",
+        "游戏用语"
+      ],
+      "chars": 368
+    },
+    {
+      "id": "fkbook/rule/index.rst#与人类有关的用语",
+      "file": "fkbook/rule/index.rst",
+      "line": 55,
+      "endLine": 61,
+      "level": 3,
+      "title": "与人类有关的用语",
+      "path": [
+        "新月杀结算说明",
+        "游戏用语"
+      ],
+      "chars": 79
+    },
+    {
+      "id": "fkbook/rule/index.rst#与牌有关的用语",
+      "file": "fkbook/rule/index.rst",
+      "line": 61,
+      "endLine": 72,
+      "level": 3,
+      "title": "与牌有关的用语",
+      "path": [
+        "新月杀结算说明",
+        "游戏用语"
+      ],
+      "chars": 270
+    },
+    {
+      "id": "fkbook/rule/index.rst#与牌的区域有关的用语",
+      "file": "fkbook/rule/index.rst",
+      "line": 72,
+      "endLine": 84,
+      "level": 3,
+      "title": "与牌的区域有关的用语",
+      "path": [
+        "新月杀结算说明",
+        "游戏用语"
+      ],
+      "chars": 294
+    },
+    {
+      "id": "fkbook/rule/index.rst#与数值有关的用语",
+      "file": "fkbook/rule/index.rst",
+      "line": 84,
+      "endLine": 97,
+      "level": 3,
+      "title": "与数值有关的用语",
+      "path": [
+        "新月杀结算说明",
+        "游戏用语"
+      ],
+      "chars": 283
+    },
+    {
+      "id": "fkbook/rule/index.rst#与描述相关的用语",
+      "file": "fkbook/rule/index.rst",
+      "line": 97,
+      "endLine": 109,
+      "level": 3,
+      "title": "与描述相关的用语",
+      "path": [
+        "新月杀结算说明",
+        "游戏用语"
+      ],
+      "chars": 266
+    },
+    {
+      "id": "fkbook/rule/index.rst#与事件和流程有关的用语",
+      "file": "fkbook/rule/index.rst",
+      "line": 109,
+      "endLine": 129,
+      "level": 3,
+      "title": "与事件和流程有关的用语",
+      "path": [
+        "新月杀结算说明",
+        "游戏用语"
+      ],
+      "chars": 439
+    },
+    {
+      "id": "fkbook/rule/index.rst#与操作牌相关的用语",
+      "file": "fkbook/rule/index.rst",
+      "line": 129,
+      "endLine": 154,
+      "level": 3,
+      "title": "与操作牌相关的用语",
+      "path": [
+        "新月杀结算说明",
+        "游戏用语"
+      ],
+      "chars": 382
+    },
+    {
+      "id": "fkbook/terminology.rst#新月杀拓展中的一些用语",
+      "file": "fkbook/terminology.rst",
+      "line": 1,
+      "endLine": 35,
+      "level": 1,
+      "title": "新月杀拓展中的一些用语",
+      "path": [],
+      "chars": 437
+    },
+    {
+      "id": "fkbook/terminology.rst#结算相关",
+      "file": "fkbook/terminology.rst",
+      "line": 7,
+      "endLine": 35,
+      "level": 2,
+      "title": "结算相关",
+      "path": [
+        "新月杀拓展中的一些用语"
+      ],
+      "chars": 333
+    },
+    {
+      "id": "fkbook/terminology.rst#事件&触发时机相关",
+      "file": "fkbook/terminology.rst",
+      "line": 10,
+      "endLine": 18,
+      "level": 3,
+      "title": "事件&触发时机相关",
+      "path": [
+        "新月杀拓展中的一些用语",
+        "结算相关"
+      ],
+      "chars": 103
+    },
+    {
+      "id": "fkbook/terminology.rst#（触发技）target",
+      "file": "fkbook/terminology.rst",
+      "line": 18,
+      "endLine": 23,
+      "level": 3,
+      "title": "（触发技）target",
+      "path": [
+        "新月杀拓展中的一些用语",
+        "结算相关"
+      ],
+      "chars": 63
+    },
+    {
+      "id": "fkbook/terminology.rst#（触发技）player",
+      "file": "fkbook/terminology.rst",
+      "line": 23,
+      "endLine": 28,
+      "level": 3,
+      "title": "（触发技）player",
+      "path": [
+        "新月杀拓展中的一些用语",
+        "结算相关"
+      ],
+      "chars": 52
+    },
+    {
+      "id": "fkbook/terminology.rst#（触发技）cost环节",
+      "file": "fkbook/terminology.rst",
+      "line": 28,
+      "endLine": 35,
+      "level": 3,
+      "title": "（触发技）cost环节",
+      "path": [
+        "新月杀拓展中的一些用语",
+        "结算相关"
+      ],
+      "chars": 94
+    }
+  ]
+}

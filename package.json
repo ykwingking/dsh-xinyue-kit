@@ -1,0 +1,61 @@
+{
+  "name": "dsh-xinyue-kit",
+  "version": "1.14.1",
+  "description": "Xinyue (新月杀 / FreeKill) extension workshop for DeepSeek Harness: AI writes Lua packages (skills/generals/game modes) with official-reference search, Lua validation-gated writes, task history, and a web workshop panel.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build:client": "node scripts/build-client.mjs",
+    "test": "node scripts/test-api.mjs && node scripts/test-tools.mjs && node scripts/test-blocks.mjs"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json",
+    "./presets/xinyue-dev/*": "./presets/xinyue-dev/*"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
+    }
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "src",
+    "presets",
+    "scripts",
+    "docs",
+    "knowledge",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "plugin",
+    "xinyue",
+    "sanguosha"
+  ],
+  "author": "ykwingking",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ykwingking/dsh-xinyue-kit.git"
+  },
+  "dependencies": {
+    "luaparse": "^0.3.1"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-tools": ">=0.1.2 <0.3.0",
+    "@deepseek-ai/schemastery": "^3.18.2",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@deepseek-ai/dsh-tools": ">=0.1.2 <0.3.0",
+    "@deepseek-ai/schemastery": "^3.18.2"
+  }
+}

@@ -1,0 +1,387 @@
+/**
+ * xinyue-kit 任务登记处:任务 = 一个武将(General,含全部技能)、一张卡牌(单技能),
+ *   或一个自定义游戏模式(type:'mode',创建模式初始无技能节点;编辑模式把
+ *   骨架/规则改动预置为节点;其余规则节点由 AI 在 skills_written 时动态登记,
+ *   dynamicSkills=true;无立绘/卡图,isCompletable 豁免图片)。
+ *   新月杀(FreeKill/Lua)包结构:packages/<包>/init.lua + skills/<技能ID>.lua。
+ *   task = { id, folder, type: 'general'|'card'|'mode', title, generalInfo, image,
+ *            target: { kind: 'general'|'card', id } | null,
+ *            cardInfo: string(自由文本,描述这张牌的基本信息;
+ *              【待补充】FreeKill 的卡牌/牌堆定义未核实——旧无名杀语义的
+ *              pile「花色 点数」已废弃,不自行编造花色点数写法),
+ *            skills: [{name, desc, explain, audios[], audioFiles[], status, rounds, feedbacks[] }],
+ *            deathAudios[], deathAudioFiles[],
+ *            dynamicSkills?: boolean, modeBrief?/modeNum?/modeWin?/modeRules?: string(mode 留档),
+ *            status: open|done, writeMode: auto|manual,
+ *            rounds, feedbacks[], notes[] (skills_written/complete 后补), summary?, createdAt, updatedAt }
+ * generalInfo = 自由文本(势力/体力/性别等),直接拼进任务消息给 AI 看。
+ * image = 立绘文件名(如 <武将ID>.jpg);FreeKill 实际落盘目录是
+ *   packages/<包>/image/generals/(卡图 packages/<包>/image/card/)。
+ * audios = 技能配音的本地源路径清单(用户表单登记);audioFiles = 已复制进包的
+ *   目标文件,存 audio/ 下相对路径(FreeKill 形如 skill/<技能ID><序号>.mp3,
+ *   实际命名以引擎/官方包惯例为准);deathAudios/deathAudioFiles 同理(阵亡语音,
+ *   任务级,audio/death/<武将ID>.mp3)。登记了配音的任务,对应文件全部
+ *   复制到位才算满足自动完成;未登记配音的任务不受影响。
+ * target 非空 = 「编辑已有条目」任务:只改该条目对应区块,其他内容不动;
+ * 这类任务豁免图片条件(立绘通常已有);配音登记通常也不出现在这类任务上。
+ * 每个技能独立状态机:待实现(open)→ 待测试(written)→ 确认无误(confirmed);
+ * 反馈把技能打回 open 并记录日志。全部技能 confirmed 且图片/配音就位 → 任务自动 done。
+ * 删除任务 = 从登记处移除整树;不动扩展代码/备份/history 归档。
+ */
+import { readJsonSafe, writeJsonAtomic } from './store.js'
+import { join } from 'node:path'
+import { homedir } from 'node:os'
+
+const ID_RE = /^[\w\u4e00-\u9fff-]{1,64}$/
+const MAX_AUDIOS_PER_TARGET = 10
+
+function tasksPath(dshHome) {
+  return join(resolveHome(dshHome), 'xinyue-kit.tasks.json')
+}
+
+function resolveHome(dshHome) {
+  if (dshHome) return dshHome
+  return join(homedir(), '.dsh')
+}
+
+export function emptyRegistry() {
+  return { version: 1, tasks: [] }
+}
+
+export async function readRegistry(dshHome) {
+  /* 安全读(损坏留档,不静默清零)+ 形状兜底:tasks 必须是数组。此前
+   * `{"tasks":null}` 会让 listTasks/createTask 直接 TypeError → 所有任务接口
+   * 永久 500,且下一次保存把整个登记处覆盖成空(实测数据丢失面)。 */
+  const parsed = await readJsonSafe(tasksPath(dshHome), emptyRegistry())
+  const registry = { ...emptyRegistry(), ...parsed }
+  if (!Array.isArray(registry.tasks)) registry.tasks = []
+  return registry
+}
+
+async function writeRegistry(dshHome, registry) {
+  await writeJsonAtomic(tasksPath(dshHome), registry)
+}
+
+const SKILL_STATUS = new Set(['open', 'written', 'confirmed'])
+
+/** 清洗配音源路径清单:逗号/分号/换行分隔,去空,截断长度与条数。 */
+function cleanAudioPaths(value) {
+  const list = Array.isArray(value) ? value : String(value || '').split(/[,，;；\n]/)
+  return list.map((p) => String(p || '').trim().slice(0, 500)).filter(Boolean).slice(0, MAX_AUDIOS_PER_TARGET)
+}
+
+/** 武将元信息四栏:称号 / 设计师 / 配音 / 画师。都是展示用短文本,各截 100 字。
+ * 空串表示「不改」(编辑模式默认),非空串按原样写入翻译表对应键。 */
+const GENERAL_META_KEYS = ['title', 'designer', 'cv', 'illustrator']
+function cleanGeneralMeta(value) {
+  const src = value && typeof value === 'object' ? value : {}
+  const out = {}
+  for (const key of GENERAL_META_KEYS) out[key] = String(src[key] || '').trim().slice(0, 100)
+  return out
+}
+
+function newSkill(item) {
+  return {
+    name: String((item && item.name) || '').slice(0, 60),
+    desc: String((item && item.desc) || '').slice(0, 2000),
+    // 补充说明:表单第三栏(给 AI 的背景/意图/参考),随任务消息一起发给 AI;
+    // 只是理解材料,不参与规则判定——旧任务记录没有该字段时按空串处理。
+    explain: String((item && item.explain) || '').slice(0, 2000),
+    audios: cleanAudioPaths(item && item.audios),
+    audioFiles: [],
+    status: 'open',
+    rounds: 0,
+    feedbacks: [],
+  }
+}
+
+function touch(task) { task.updatedAt = Date.now() }
+
+/** 是否满足自动完成:全部技能 confirmed 且图片/配音就位。
+ * 编辑已有条目任务(target 非空)豁免图片条件:立绘通常早已存在,用户没登记
+ * 图片 = 本次不涉及图——实测测试包-03 全确认后因没填图片永远卡在进行中。
+ * (编辑+换图场景用户会填图片路径,登记后照旧走 copy_images/补图链路。)
+ * 配音门禁:按登记计量——技能登记了 N 条源路径,就要交付 ≥N 个目标文件
+ * (audioFiles/deathAudioFiles);没登记配音的任务完全不受影响。 */
+function isCompletable(task) {
+  // 🎲 mode 任务:无预登记图片(模式扩展无立绘/卡图需求),图片条件豁免(同 target 编辑任务)
+  const imageOk = task.target || task.type === 'mode' ? true : Boolean(task.image)
+  const audioOk = task.skills.every((s) =>
+    !(Array.isArray(s.audios) && s.audios.length) ||
+    (Array.isArray(s.audioFiles) && s.audioFiles.length >= s.audios.length))
+  const deathOk = !(Array.isArray(task.deathAudios) && task.deathAudios.length) ||
+    (Array.isArray(task.deathAudioFiles) && task.deathAudioFiles.length >= task.deathAudios.length)
+  return imageOk && audioOk && deathOk && task.skills.length > 0 && task.skills.every((s) => s.status === 'confirmed')
+}
+
+function descriptionOf(skills) {
+  return Array.isArray(skills) && skills[0] && skills[0].desc ? String(skills[0].desc).slice(0, 2000) : ''
+}
+
+/**
+ * 创建任务。ID 全局唯一;general 任务带 skills 分叉;card 任务单节点。
+ * skills: [{name, desc}];card 类型自动生成单节点。
+ * target 可选 { kind: 'general'|'card', id }:「编辑已有条目」任务,非法值归 null。
+ * writeMode:'manual' 存手动,其余归 'auto'——写入工具以此为准(AI 传参不覆盖)。
+ * generalMeta 可选 { title, designer, cv, illustrator }:武将称号/设计/配音/画师
+ * (写入翻译表 #<ID> / designer: / cv: / illustrator: 的字符串;默认「官方」)。
+ */
+export async function createTask(dshHome, { id, folder, type, title, generalInfo, cardInfo, skills, image, deathAudios, target, writeMode, modeBrief, modeNum, modeWin, modeRules, generalMeta }) {
+  if (typeof id !== 'string' || !ID_RE.test(id.trim())) {
+    return { ok: false, error: `任务ID「${id}」不合法:只允许中文/字母/数字/下划线/连字符,长度 1-64。` }
+  }
+  if (typeof folder !== 'string' || !ID_RE.test(folder.trim())) {
+    return { ok: false, error: `扩展文件夹名「${folder}」不合法。` }
+  }
+  const cleanId = id.trim()
+  const registry = await readRegistry(dshHome)
+  if (registry.tasks.some((t) => t.id === cleanId)) {
+    return { ok: false, error: `任务ID「${cleanId}」已存在,换一个(或加上日期/序号)。` }
+  }
+  // 🎲 mode = 自定义游戏模式任务:新玩法规则节点由 AI 在 skills_written 时动态登记
+  // (自由描述无法预先拆规则),创建模式初始 skills 为空;编辑模式把用户填的
+  // 「模式骨架改动/新增或调整的规则」预置为节点(带内容,任务树可见、逐条确认),
+  // dynamicSkills 置真使 AI 回传的其他规则节点也能动态登记
+  const taskType = type === 'card' ? 'card' : type === 'mode' ? 'mode' : 'general'
+  const skillList = taskType === 'mode'
+    ? (Array.isArray(skills) && skills.length ? skills.map(newSkill) : [])
+    : taskType === 'card'
+    ? [newSkill({ name: title || (Array.isArray(skills) && skills[0] && skills[0].name) || '新卡牌', desc: descriptionOf(skills) })]
+    : ((Array.isArray(skills) && skills.length ? skills : [{ name: title || '新技能', desc: '' }]).map(newSkill))
+  const taskTarget = target && (target.kind === 'general' || target.kind === 'card')
+    && typeof target.id === 'string' && ID_RE.test(target.id.trim())
+    ? { kind: target.kind, id: target.id.trim() }
+    : null
+  const task = {
+    id: cleanId,
+    folder: folder.trim(),
+    type: taskType,
+    target: taskTarget,
+    title: String(title || '').slice(0, 60),
+    generalInfo: String(generalInfo || '').slice(0, 500),
+    // 武将元信息(称号/设计/配音/画师):按 FreeKill 的翻译表键存字符串,
+    // 每项 100 字上限——它们是展示用短文本,写长了只会在武将详情里溢出。
+    generalMeta: cleanGeneralMeta(generalMeta),
+    // 卡牌基本信息(自由文本);【待补充】FreeKill 的卡牌/牌堆定义未核实
+    cardInfo: String(cardInfo || '').slice(0, 2000),
+    image: String(image || '').trim().slice(0, 500),
+    deathAudios: cleanAudioPaths(deathAudios),
+    deathAudioFiles: [],
+    skills: skillList,
+    // 🎲 mode 专属:需求四要素留档 + 动态规则节点标志(skills_written 据此放行回传规则名)
+    dynamicSkills: taskType === 'mode',
+    modeBrief: taskType === 'mode' ? String(modeBrief || '').slice(0, 300) : '',
+    modeNum: taskType === 'mode' ? String(modeNum || '').slice(0, 10) : '',
+    modeWin: taskType === 'mode' ? String(modeWin || '').slice(0, 300) : '',
+    modeRules: taskType === 'mode' ? String(modeRules || '').slice(0, 5000) : '',
+    writeMode: writeMode === 'manual' ? 'manual' : 'auto',
+    status: 'open',
+    rounds: 0,
+    feedbacks: [],
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
+  }
+  registry.tasks.push(task)
+  if (registry.tasks.length > 300) registry.tasks = registry.tasks.slice(-300)
+  await writeRegistry(dshHome, registry)
+  return { ok: true, task }
+}
+
+export async function listTasks(dshHome, { openOnly } = {}) {
+  const registry = await readRegistry(dshHome)
+  const list = openOnly ? registry.tasks.filter((t) => t.status === 'open') : registry.tasks
+  return list.slice().sort((a, b) => b.updatedAt - a.updatedAt)
+}
+
+/** 按 ID 取任务;不存在返回 null。 */
+export async function getTask(dshHome, taskId) {
+  const registry = await readRegistry(dshHome)
+  return registry.tasks.find((t) => t.id === taskId) || null
+}
+
+/** 重开已完成任务:done → open。不动技能状态/轮次/反馈——
+ * 供补图或重新确认后再次收口(自动归档由既有确认链路触发)。 */
+export async function reopenTask(dshHome, { taskId }) {
+  const registry = await readRegistry(dshHome)
+  const task = registry.tasks.find((t) => t.id === taskId)
+  if (!task) return { ok: false, error: `找不到任务「${taskId}」` }
+  task.status = 'open'
+  touch(task)
+  await writeRegistry(dshHome, registry)
+  return { ok: true, task }
+}
+
+/** 删除任务:从登记处移除整条记录(不影响扩展代码/备份/history 归档)。 */
+export async function deleteTask(dshHome, taskId) {
+  const registry = await readRegistry(dshHome)
+  const idx = registry.tasks.findIndex((t) => t.id === taskId)
+  if (idx < 0) return { ok: false, error: `找不到任务「${taskId}」` }
+  const removed = registry.tasks.splice(idx, 1)[0]
+  await writeRegistry(dshHome, registry)
+  return { ok: true, removed }
+}
+
+/**
+ * 完成任务:标记 done + 返回任务信息(调用方负责把摘要同步进扩展文件夹 history)。
+ * @returns {{ok:boolean, task?:object, error?:string}}
+ */
+export async function completeById(dshHome, { taskId, summary, notes }) {
+  const registry = await readRegistry(dshHome)
+  const task = registry.tasks.find((t) => t.id === taskId)
+  if (!task) return { ok: false, error: `找不到任务「${taskId}」` }
+  task.status = 'done'
+  task.updatedAt = Date.now()
+  if (summary) task.summary = String(summary).slice(0, 2000)
+  if (Array.isArray(notes) && notes.length) {
+    task.notes = (task.notes || []).concat(notes.map((n) => String(n).slice(0, 500))).slice(-20)
+  }
+  await writeRegistry(dshHome, registry)
+  return { ok: true, task }
+}
+
+
+function findSkill(task, skillName) {
+  return task.skills.find((s) => s.name === skillName)
+}
+
+/**
+ * 设置单个技能的状态(用户点确认无误 / AI 标记写入完成 / 打回)。
+ * @param {string} status - open|written|confirmed
+ */
+export async function setSkillStatus(dshHome, { taskId, skill, status }) {
+  if (!SKILL_STATUS.has(status)) return { ok: false, error: `未知状态「${status}」` }
+  const registry = await readRegistry(dshHome)
+  const task = registry.tasks.find((t) => t.id === taskId)
+  if (!task) return { ok: false, error: `找不到任务「${taskId}」` }
+  const node = findSkill(task, skill)
+  if (!node) return { ok: false, error: `任务「${taskId}」里没有技能「${skill}」` }
+  node.status = status
+  touch(task)
+  const autoCompleted = isCompletable(task) && task.status !== 'done'
+  if (autoCompleted) task.status = 'done'
+  await writeRegistry(dshHome, registry)
+  const confirmed = task.skills.filter((s) => s.status === 'confirmed').length
+  return { ok: true, autoCompleted, task, confirmed, total: task.skills.length }
+}
+
+/** AI 写入完成:把指定技能标为 written(待测试);可携带引擎级注意点(合并去重存任务)。
+ *  🎲 mode 任务(dynamicSkills)的规则节点由 AI 回传时动态登记——自由描述无法预先拆规则。 */
+export async function markSkillsWritten(dshHome, { taskId, skills, notes }) {
+  const registry = await readRegistry(dshHome)
+  const task = registry.tasks.find((t) => t.id === taskId)
+  if (!task) return { ok: false, error: `找不到任务「${taskId}」` }
+  const dynamic = task.dynamicSkills === true
+  /* 已归档(done)的任务又被 AI 标记写入:说明它其实还在改。此前 status 留在 done,
+   * 后续用户确认技能时 autoCompleted 恒 false → 永远不触发归档,历史摘要停在旧值,
+   * 界面上毫无提示(实测死角)。这里自动重开,并让返回里带 reopened 供调用方提醒。 */
+  let reopened = false
+  if (task.status === 'done') {
+    task.status = 'open'
+    reopened = true
+  }
+  const names = Array.isArray(skills) ? skills : []
+  const missing = []
+  for (const name of names) {
+    const node = findSkill(task, name)
+    if (!node) {
+      if (dynamic && typeof name === 'string' && name.trim()) {
+        const node2 = newSkill({ name: name.trim() })
+        node2.status = 'written'
+        task.skills.push(node2)
+        continue
+      }
+      missing.push(name)
+      continue
+    }
+    node.status = 'written'
+  }
+  let notesStored = 0
+  if (Array.isArray(notes) && notes.length) {
+    const clean = notes.map((n) => String(n).slice(0, 500)).filter(Boolean)
+    task.notes = [...new Set([...(task.notes || []), ...clean])].slice(-20)
+    notesStored = task.notes.length
+  }
+  touch(task)
+  await writeRegistry(dshHome, registry)
+  return { ok: missing.length === 0, missing, marked: names.length - missing.length, notesStored, reopened, task }
+}
+
+/**
+ * 反馈:轮次+1(任务与技能各计)、日志追加、技能打回 open。
+ * @param {string} [input.skill] - 具体技能名;不传则只推进任务轮次。
+ */
+export async function skillFeedback(dshHome, { taskId, skill, issue }) {
+  const registry = await readRegistry(dshHome)
+  const task = registry.tasks.find((t) => t.id === taskId)
+  if (!task) return { ok: false, error: `找不到任务「${taskId}」` }
+  const issueText = String(issue || '').slice(0, 2000)
+  if (!Array.isArray(task.feedbacks)) task.feedbacks = []
+  task.rounds += 1
+  task.status = 'open'
+  let unknownSkill = null
+  if (skill) {
+    const node = findSkill(task, skill)
+    if (node) {
+      node.status = 'open'
+      node.rounds += 1
+      node.feedbacks.push({ at: Date.now(), issue: issueText })
+      if (node.feedbacks.length > 50) node.feedbacks = node.feedbacks.slice(-50)
+    } else unknownSkill = skill
+  }
+  task.feedbacks.push({ at: Date.now(), skill: skill || '', issue: issueText })
+  if (task.feedbacks.length > 100) task.feedbacks = task.feedbacks.slice(-100)
+  touch(task)
+  await writeRegistry(dshHome, registry)
+  // unknownSkill 非空 = 技能名不在任务清单里(日志/API 可见;状态照常打回 open)
+  return { ok: true, unknownSkill, task }
+}
+
+/** 补图:设置任务图片路径(路径由用户在表单填写)。
+ * 补图后若满足「全确认+有图」,自动置 done(归档由调用方完成)——
+ * 否则全确认后补图的任务会永远停在 open,无人触发收口。 */
+export async function setTaskImage(dshHome, { taskId, image }) {
+  const registry = await readRegistry(dshHome)
+  const task = registry.tasks.find((t) => t.id === taskId)
+  if (!task) return { ok: false, error: `找不到任务「${taskId}」` }
+  task.image = String(image || '').slice(0, 500)
+  const autoCompleted = isCompletable(task) && task.status !== 'done'
+  if (autoCompleted) task.status = 'done'
+  touch(task)
+  await writeRegistry(dshHome, registry)
+  return { ok: true, task, autoCompleted }
+}
+
+/** 追加任务级阵亡语音的已交付文件(audio/ 下相对路径,形如 death/<武将ID>.mp3;去重)。
+ * 与 setTaskImage 同语义:交付满足条件时自动置 done,归档由调用方完成。
+ * (导出名保持 setDieAudioFiles 不变:index.js 仍在用,改名会连带改动包外引用。) */
+export async function setDieAudioFiles(dshHome, { taskId, files }) {
+  const registry = await readRegistry(dshHome)
+  const task = registry.tasks.find((t) => t.id === taskId)
+  if (!task) return { ok: false, error: `找不到任务「${taskId}」` }
+  const list = Array.isArray(files) ? files : [files]
+  const clean = list.map((f) => String(f || '').trim()).filter(Boolean)
+  task.deathAudioFiles = [...new Set([...(task.deathAudioFiles || []), ...clean])].slice(0, 50)
+  const autoCompleted = isCompletable(task) && task.status !== 'done'
+  if (autoCompleted) task.status = 'done'
+  touch(task)
+  await writeRegistry(dshHome, registry)
+  return { ok: true, task, autoCompleted }
+}
+
+/** 追加某个技能配音的已交付文件(audio/ 下相对路径,形如 skill/<名>.mp3;去重)。
+ * skill 用任务里的技能显示名(与 setSkillStatus 同一 key);找不到返回 error 并附任务技能名清单。 */
+export async function setSkillAudioFiles(dshHome, { taskId, skill, files }) {
+  const registry = await readRegistry(dshHome)
+  const task = registry.tasks.find((t) => t.id === taskId)
+  if (!task) return { ok: false, error: `找不到任务「${taskId}」` }
+  const node = findSkill(task, skill)
+  if (!node) return { ok: false, error: `任务「${taskId}」里没有技能「${skill}」(任务技能名: ${task.skills.map((s) => s.name).join('、') || '无'})` }
+  const list = Array.isArray(files) ? files : [files]
+  const clean = list.map((f) => String(f || '').trim()).filter(Boolean)
+  node.audioFiles = [...new Set([...(node.audioFiles || []), ...clean])].slice(0, 50)
+  const autoCompleted = isCompletable(task) && task.status !== 'done'
+  if (autoCompleted) task.status = 'done'
+  touch(task)
+  await writeRegistry(dshHome, registry)
+  return { ok: true, task, autoCompleted }
+}

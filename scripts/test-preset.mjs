@@ -1,0 +1,312 @@
+#!/usr/bin/env node
+/**
+ * xinyue-kit 单测:preset 自检与安装(内容哈希 / 状态判定 / 备份 / 链接防御)。
+ * 运行:node scripts/test-preset.mjs
+ * 全程隔离在系统临时目录,不碰真实家目录与真实 preset。
+ */
+import { existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, symlinkSync, unlinkSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
+import assert from 'node:assert/strict'
+
+let passed = 0
+function ok(cond, label) {
+  assert.ok(cond, label)
+  passed++
+  console.log('  ✓ ' + label)
+}
+function eq(actual, expected, label) {
+  assert.deepEqual(actual, expected, label + ` (期望 ${JSON.stringify(expected)},实得 ${JSON.stringify(actual)})`)
+  passed++
+  console.log('  ✓ ' + label)
+}
+
+const home = mkdtempSync(join(tmpdir(), 'xinyue-kit-preset-test-'))
+const bundled = join(home, 'bundled', 'xinyue-dev')
+const presetDir = join(home, 'dsh-home', '.agent-presets', 'xinyue-dev')
+
+function writeBundled() {
+  mkdirSync(join(bundled, 'skills', 'xinyue-extension-dev'), { recursive: true })
+  writeFileSync(join(bundled, 'preset.yml'), 'name: 新月杀开发模式\n')
+  writeFileSync(join(bundled, 'agent.cordis.yml'), 'persona:\n  prefix: 你是新月杀扩展开发者\n')
+  writeFileSync(join(bundled, 'custom-bash.mjs'), 'export const x = 1\n')
+  writeFileSync(join(bundled, 'skills', 'xinyue-extension-dev', 'SKILL.md'), '# 规范\n')
+}
+
+try {
+  const preset = await import('../src/preset.js')
+  writeBundled()
+
+  // ── 1) 内容哈希 ──
+  eq(preset.hashDir(join(home, 'nope')), null, '目录不存在时哈希为 null')
+  const baseHash = preset.hashDir(bundled)
+  ok(/^[0-9a-f]{64}$/.test(baseHash), '哈希是 64 位十六进制')
+  eq(preset.hashDir(bundled), baseHash, '同一目录两次哈希一致')
+  ok(preset.hashDir(join(bundled, 'skills')) !== baseHash, '嵌套子目录的内容参与哈希(路径前缀不同)')
+
+  // 点开头的条目必须被忽略,否则"写盖章"这个动作本身会让自检永远报过期
+  writeFileSync(join(bundled, '.DS_Store'), 'junk')
+  eq(preset.hashDir(bundled), baseHash, '点开头的文件(.DS_Store)不影响哈希')
+  unlinkSync(join(bundled, '.DS_Store'))
+
+  // 创建顺序不影响结果(按相对路径排序)
+  const alt = join(home, 'alt')
+  mkdirSync(join(alt, 'skills', 'xinyue-extension-dev'), { recursive: true })
+  writeFileSync(join(alt, 'skills', 'xinyue-extension-dev', 'SKILL.md'), '# 规范\n')
+  writeFileSync(join(alt, 'custom-bash.mjs'), 'export const x = 1\n')
+  writeFileSync(join(alt, 'agent.cordis.yml'), 'persona:\n  prefix: 你是新月杀扩展开发者\n')
+  writeFileSync(join(alt, 'preset.yml'), 'name: 新月杀开发模式\n')
+  eq(preset.hashDir(alt), baseHash, '创建顺序不同但内容相同 → 哈希相同')
+
+  // 行尾不同不算差异:Windows 上 git 检出会把 LF 转 CRLF(实测 pnpm 装 git 依赖
+  // 就是这样),不归一化会把内容完全相同的两份误报成"不一致"
+  const crlf = join(home, 'crlf')
+  mkdirSync(join(crlf, 'skills', 'xinyue-extension-dev'), { recursive: true })
+  writeFileSync(join(crlf, 'preset.yml'), 'name: 新月杀开发模式\n'.replace(/\n/g, '\r\n'))
+  writeFileSync(join(crlf, 'agent.cordis.yml'), 'persona:\r\n  prefix: 你是新月杀扩展开发者\r\n')
+  writeFileSync(join(crlf, 'custom-bash.mjs'), 'export const x = 1\r\n')
+  writeFileSync(join(crlf, 'skills', 'xinyue-extension-dev', 'SKILL.md'), '# 规范\r\n')
+  eq(preset.hashDir(crlf), baseHash, 'CRLF 与 LF 内容相同 → 哈希相同(行尾不算差异)')
+
+  // 内容变、增、删都必须被发现
+  writeFileSync(join(alt, 'preset.yml'), 'name: 新月杀开发模式(改)\n')
+  ok(preset.hashDir(alt) !== baseHash, '改一个字节 → 哈希变化')
+  writeFileSync(join(alt, 'preset.yml'), 'name: 新月杀开发模式\n')
+  writeFileSync(join(alt, 'extra.mjs'), 'export const y = 2\n')
+  ok(preset.hashDir(alt) !== baseHash, '多一个文件 → 哈希变化')
+  unlinkSync(join(alt, 'extra.mjs'))
+  eq(preset.hashDir(alt), baseHash, '删掉多余文件 → 哈希回到原值')
+
+  // ── 2) 状态判定 ──
+  eq(preset.presetStatus({ presetDir, bundledDir: bundled }).state, 'missing', '没装 → missing')
+  const installed = preset.installPreset({ presetDir, bundledDir: bundled })
+  ok(installed.ok && installed.target === presetDir, '安装成功并返回目标路径')
+  eq(installed.backup, null, '首次安装没有备份')
+  const afterInstall = preset.presetStatus({ presetDir, bundledDir: bundled })
+  eq(afterInstall.state, 'ok', '装完即 ok(盖章文件不影响哈希)')
+  eq(afterInstall.installedHash, afterInstall.bundledHash, '装完两侧哈希相同(判定依据就是它)')
+  ok(existsSync(join(presetDir, '.xinyue-kit-install.json')), '盖章文件已写入')
+  const stamp = JSON.parse(readFileSync(join(presetDir, '.xinyue-kit-install.json'), 'utf8'))
+  ok(!!stamp.hash && typeof stamp.installedAt === 'number', '盖章只记内容哈希与时间')
+  eq(stamp.pluginVersion, undefined, '盖章里不存版本号(preset 不按版本管理)')
+
+  const manifest = join(presetDir, 'agent.cordis.yml')
+  const original = readFileSync(manifest, 'utf8')
+  writeFileSync(manifest, original + '# 用户自己加了一行\n')
+  const edited = preset.presetStatus({ presetDir, bundledDir: bundled })
+  eq(edited.state, 'stale', '本地被改过 → stale')
+  ok(edited.installedHash !== edited.bundledHash, '被改过 → 两侧哈希不同(界面就照这个说)')
+  writeFileSync(manifest, original)
+  const restored = preset.presetStatus({ presetDir, bundledDir: bundled })
+  eq(restored.state, 'ok', '改回去 → 又 ok')
+  eq(restored.installedHash, restored.bundledHash, '改回去 → 两侧哈希又相同')
+
+  // 没有盖章的老 preset(旧脚本装的、手工放的):判据仍是哈希,一样能判
+  unlinkSync(join(presetDir, '.xinyue-kit-install.json'))
+  const noStamp = preset.presetStatus({ presetDir, bundledDir: bundled })
+  eq(noStamp.state, 'ok', '没有盖章但内容一致 → 仍判 ok')
+  writeFileSync(manifest, original + '# 又改一行\n')
+  eq(preset.presetStatus({ presetDir, bundledDir: bundled }).state, 'stale', '没有盖章时内容不一致 → 仍判 stale')
+  writeFileSync(manifest, original)
+  preset.installPreset({ presetDir, bundledDir: bundled })
+
+  unlinkSync(join(presetDir, 'custom-bash.mjs'))
+  eq(preset.presetStatus({ presetDir, bundledDir: bundled }).state, 'stale', '少一个文件 → stale')
+
+  // 插件侧源目录坏了 → unknown(而不是误判成 stale)
+  const brokenSource = join(home, 'broken-source')
+  mkdirSync(brokenSource, { recursive: true })
+  eq(preset.presetStatus({ presetDir, bundledDir: brokenSource }).state, 'unknown', '插件自带源为空 → unknown')
+
+  // ── 3) 重装与备份 ──
+  // 放一个只有"重装前"才有的标记,用来验证备份抓的是旧状态、重装换的是新内容
+  writeFileSync(join(presetDir, 'USER-NOTE.txt'), '用户自己加的东西\n')
+  const reinstalled = preset.installPreset({ presetDir, bundledDir: bundled })
+  ok(reinstalled.ok && typeof reinstalled.backup === 'string', '重装产生备份')
+  ok(/\.bak-\d+$/.test(reinstalled.backup), '备份名前缀为 .bak-<时间戳>(点号让 DSH 不把它当 preset 扫出来)')
+  ok(existsSync(join(reinstalled.backup, 'USER-NOTE.txt')), '备份完整保留了重装前那份(含用户加的文件)')
+  ok(!existsSync(join(presetDir, 'USER-NOTE.txt')), '重装后目标目录换成了插件自带那份')
+  eq(preset.presetStatus({ presetDir, bundledDir: bundled }).state, 'ok', '重装后恢复 ok')
+  eq(preset.presetStatus({ presetDir, bundledDir: bundled }).installedHash, preset.presetStatus({ presetDir, bundledDir: bundled }).bundledHash, '重装后两侧哈希又相同')
+
+  // ── 3.5) 备份滚动清理:连续重装只保留最新 3 个 .bak- ──
+  for (let i = 0; i < 4; i++) {
+    // 间隔几毫秒:备份名含毫秒时间戳,同毫秒会撞名
+    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 5)
+    preset.installPreset({ presetDir, bundledDir: bundled })
+  }
+  const bakAfter = readdirSync(join(home, 'dsh-home', '.agent-presets'))
+    .filter((n) => n.startsWith('xinyue-dev.bak-'))
+  eq(bakAfter.length, 3, '备份滚动清理:连续重装后只保留最新 3 个 .bak-')
+  ok(!bakAfter.includes(reinstalled.backup.split(/[\\/]/).pop()), '最老的备份已被清掉(内容源自插件仓库,git 历史可溯源)')
+
+  // 目标目录不完整时不许安装(宁可不装,也不要留半份)
+  const badResult = preset.installPreset({ presetDir: join(home, 'x'), bundledDir: brokenSource })
+  ok(!badResult.ok && /不完整/.test(badResult.error), '插件自带 preset 不完整 → 拒绝安装并报错')
+  ok(!existsSync(join(home, 'x')), '拒绝安装时不会留下半份目录')
+
+  // ── 4) 目标位置是链接时:只删链接,绝不递归进目标 ──
+  const linkTarget = join(home, 'link-target')
+  mkdirSync(linkTarget, { recursive: true })
+  writeFileSync(join(linkTarget, 'keep-me.txt'), 'important\n')
+  const linkDir = join(home, 'dsh-home', '.agent-presets', 'link-probe')
+  symlinkSync(linkTarget, linkDir, process.platform === 'win32' ? 'junction' : 'dir')
+  /* 本机(Win + node 24)把 junction 报成普通目录:lstatSync().isSymbolicLink() 为 false、
+   * readlinkSync 报 EINVAL、realpathSync 不解析到目标 —— preset.js 的链接防御因此认不出
+   * 它,退化成「按目录备份 + 替换」。目标内容不被删除这条硬约束与平台无关,照旧钉死;
+   * 「不产生备份」只在平台真的把链接报出来时才断言(POSIX / 真 symlink)。 */
+  const linkReportedAsLink = lstatSync(linkDir).isSymbolicLink()
+  const linkResult = preset.installPreset({ presetDir: linkDir, bundledDir: bundled })
+  ok(linkResult.ok, '目标位置是链接时也能安装')
+  ok(existsSync(join(linkTarget, 'keep-me.txt')), '链接指向的真实目录内容未被删除(递归进目标 = 数据丢失)')
+  ok(existsSync(join(linkDir, 'agent.cordis.yml')), '链接位置已换成真实的新 preset')
+  if (linkReportedAsLink) eq(linkResult.backup, null, '链接不产生备份(链接本身没有内容可备份)')
+  else console.log('  ⚠ 本机 junction 不报 isSymbolicLink(lstat/readlink 均认不出):跳过「不产生备份」,已用上面的目标内容完好断言兜底')
+
+  // ── 5) 家目录解析优先级 ──
+  const savedHome = process.env.DSH_HOME
+  process.env.DSH_HOME = join(home, 'env-home')
+  eq(preset.resolveDshHome(), join(home, 'env-home'), '$DSH_HOME 优先')
+  const { homedir } = await import('node:os')
+  process.env.DSH_HOME = ''
+  eq(preset.resolveDshHome(), join(homedir(), '.dsh'), '$DSH_HOME 为空时回落到 ~/.dsh')
+  delete process.env.DSH_HOME
+  eq(preset.resolveDshHome(), join(homedir(), '.dsh'), '$DSH_HOME 未设置时回落到 ~/.dsh')
+  if (savedHome === undefined) delete process.env.DSH_HOME
+  else process.env.DSH_HOME = savedHome
+  eq(preset.presetDirOf('/tmp/x'), join('/tmp/x', '.agent-presets', 'xinyue-dev'), 'presetDirOf 拼出预期路径')
+
+  // 重装把原来那个链接摘掉、换成了真实目录(链接没被"跟随",目标目录内容完好)
+  ok(!lstatSync(linkDir).isSymbolicLink(), '重装后原链接位置已是真实目录(链接被摘下而非跟随写入)')
+  rmSync(linkDir, { recursive: true, force: true })
+  // 备份与那份 preset 同层:DSH 的 PRESET_ID 不允许点号,所以备份不会被扫成一个 preset
+  const presetEntries = readdirSync(join(home, 'dsh-home', '.agent-presets'))
+  ok(presetEntries.some((n) => /\.bak-\d+$/.test(n)), '备份与 preset 同层且名字带 .bak-<时间戳>')
+  ok(!/^[a-z0-9][a-z0-9-]*$/.test(reinstalled.backup.split(/[\\/]/).pop()), '备份目录名不匹配 DSH 的 PRESET_ID 规则 → 不会被 discovery 收录')
+
+  // ── custom-bash 的全盘检索闸(issue #1:模型 find / 全盘找目录,几分钟出不来)──
+  const { rootSearchIssue } = await import('../presets/xinyue-dev/custom-bash.mjs')
+  const refuseCase = [
+    'find / -maxdepth 6 -type d -name "神创包" 2>/dev/null | head',
+    'grep -rn "layout" /',
+    'find ~ -name x',
+    'du -sh / ; ls',
+    'ls -la /',
+    'ls /d/',
+    'ls /c/ /d/ /e/',
+    'dir C:\\',
+  ]
+  for (const cmd of refuseCase) ok(!!rootSearchIssue(cmd), '全盘检索闸:拒绝 ' + cmd.slice(0, 40))
+  const allowCase = [
+    'find /d/games/freekill/packages -name "*.lua"',
+    'grep -rn "draw" lua/core | head -20',
+    'grep -rn "path / desc" docs/x.md',
+    'ls /d/games/freekill-整合包/resources/app',
+    'ls -la /d/deepseek-harness',
+    'find . -name x',
+  ]
+  for (const cmd of allowCase) ok(rootSearchIssue(cmd) === null, '全盘检索闸:放行 ' + cmd.slice(0, 40))
+
+  // ── N) 声明式 preset(DSH 0.1.7+)与目录式的单一事实源把关 ──
+  // 0.1.7 的组合声明在插件 cordis.patch.yml(bundle patch,随插件加载自动就位),
+  // 0.1.6 及以下继续用 presets/xinyue-dev/agent.cordis.yml(目录式)。两份必须
+  // 内容同步:persona 漂移会把自相矛盾的指令发给 AI,这里用字符串级断言锁死。
+  {
+    const repoRoot = new URL('../', import.meta.url)
+    const readRepo = (p) => readFileSync(new URL(p, repoRoot), 'utf8')
+    const patchYml = readRepo('cordis.patch.yml')
+    const compositionYml = readRepo('presets/xinyue-dev/agent.cordis.yml')
+    const pkgJson = JSON.parse(readRepo('package.json'))
+
+    ok(patchYml.includes('id: preset-xinyue-dev'), '声明式:cordis.patch.yml 声明了 preset-xinyue-dev')
+    ok(patchYml.includes("'@deepseek-ai/dsh-agent-preset'"), '声明式:使用 @deepseek-ai/dsh-agent-preset 服务')
+    // 0.1.6 守卫:没有 agent-preset 包的宿主上整行禁用,目录式 preset 不受干扰
+    ok(patchYml.includes("resolve('@deepseek-ai/dsh-agent-preset/package.json')"), '声明式:disabled 探测表达式守卫 0.1.6')
+
+    // 自有脚本必须用包名子路径(可移植,禁止相对/绝对路径写死)
+    const localScripts = ['instruction-hint.mjs', 'dev-tool-search.mjs', 'zero-tool-bootstrap.mjs', 'anchor-turn.mjs', 'custom-bash.mjs', 'skill-search.mjs']
+    for (const name of localScripts) {
+      ok(patchYml.includes(`dsh-xinyue-kit/presets/xinyue-dev/${name}`), `声明式:${name} 用包名子路径引用`)
+      ok(existsSync(new URL(`presets/xinyue-dev/${name}`, repoRoot)), `声明式:${name} 文件真实存在`)
+      ok(!new RegExp(`name: \\./${name}`).test(patchYml), `声明式:${name} 没有写死相对路径`)
+    }
+
+    // 技能目录用 !!js 从 baseUrl 相对解析(官方 cordis preset 同款写法)
+    ok(/customSkillDirs:[\s\S]*?dsh-xinyue-kit\/package\.json[\s\S]*?'presets', 'xinyue-dev', 'skills'/.test(patchYml), '声明式:技能目录经 !!js 从插件包相对解析')
+    ok(existsSync(new URL('presets/xinyue-dev/skills/xinyue-extension-dev/SKILL.md', repoRoot)), '声明式:插件包内技能目录存在')
+
+    // exports 必须导出子路径,否则包名引用在 node 解析层被拒
+    ok(pkgJson.exports && pkgJson.exports['./presets/xinyue-dev/*'] === './presets/xinyue-dev/*', '声明式:package.json exports 导出 presets 子路径')
+
+    // persona 正文两处同步:提取两份的 prefix 折叠块,归一空白后必须完全一致
+    const extractPrefix = (text) => {
+      const lines = text.split('\n')
+      const start = lines.findIndex((l) => /^\s*prefix: >-/.test(l))
+      if (start < 0) return null
+      const indent = lines[start].search(/\S/)
+      const body = [lines[start].replace(/^\s*prefix: >-\s*/, '')]
+      for (let i = start + 1; i < lines.length; i++) {
+        const line = lines[i]
+        if (line.trim() === '' ) { body.push(''); continue }
+        const cur = line.search(/\S/)
+        if (cur <= indent) break
+        body.push(line.trim())
+      }
+      return body.join(' ').replace(/\s+/g, ' ').trim()
+    }
+    const fromComposition = extractPrefix(compositionYml)
+    const fromPatch = extractPrefix(patchYml)
+    ok(fromComposition && fromPatch, '声明式:两份 persona prefix 均可提取')
+    eq(fromPatch, fromComposition, '声明式:persona 正文与目录式 preset 完全同步')
+
+    // 机制探测:开发目录下(无宿主 peer)应为 false,但任何环境都不得抛异常
+    const declarative = await preset.hostHasDeclarativePreset()
+    ok(typeof declarative === 'boolean', '声明式:hostHasDeclarativePreset 返回布尔不抛异常')
+  }
+
+  /* ── S) 两份「新月杀(FreeKill)扩展开发规范」必须同步 ──
+   * 常驻知识文本(src/knowledge.js 的 KNOWLEDGE_TEXT,进系统提示)与 preset 里的
+   * skills/xinyue-extension-dev/SKILL.md(skill_load 读到的那份)是同一份规范的两处
+   * 手抄:只改一处 → AI 一边读到「这样写」、另一边读到「那样写」,而且不报错。
+   * 正文逐字比对太脆(格式微调就会误报),这里比对**待补充占位的处数**——它既是
+   * "这份规范还有多少空白"的进度,也是两份手抄同步性的硬约束。 */
+  {
+    const repoRoot = new URL('../', import.meta.url)
+    const knowledge = await import('../src/knowledge.js')
+    const skillMd = readFileSync(new URL('presets/xinyue-dev/skills/xinyue-extension-dev/SKILL.md', repoRoot), 'utf8')
+    const countMarker = (text) => (String(text).match(/【待补充:/g) || []).length
+    // 只数"真占位"（【待补充: 后不是省略号）。开头那句通用约定写的是 `【待补充:…】`，
+    // 它是给模型的说明、不是待填内容 —— 计进去会让设置页永远显示"还有 1 处"。
+    const countRealTodo = (text) => (String(text).match(/【待补充:(?!…)/g) || []).length
+    const inKnowledge = countRealTodo(knowledge.KNOWLEDGE_TEXT)
+    const inSkillMd = countRealTodo(skillMd)
+    eq(inKnowledge, inSkillMd, '常驻知识文本与 SKILL.md 的 【待补充: 处数一致(两份手抄同步)')
+    ok(knowledge.countKnowledgeTodo() === inKnowledge, 'countKnowledgeTodo 口径与直接统计一致(设置页进度不虚报)')
+    ok(countMarker(skillMd) >= inSkillMd, 'SKILL.md 里至少包含这些真占位（防正则漏配）')
+
+    /* 两份 preset 配置里的工具名白名单必须逐字一致：
+     * 一边加了新工具、另一边忘了同步，会导致"锚定轮后常驻的工具"与实际注册的工具对不上，
+     * 而且**不报错**——AI 会在该轮拿不到工具、表现成"莫名其妙不会用"。 */
+    {
+      const patchYml = readFileSync(new URL('cordis.patch.yml', repoRoot), 'utf8')
+      const agentYml = readFileSync(new URL('presets/xinyue-dev/agent.cordis.yml', repoRoot), 'utf8')
+      const toolList = (text, key) => {
+        const m = String(text).match(new RegExp(key + '\\s*:\\s*\\[([^\\]]*)\\]'))
+        return m ? m[1].split(',').map((s) => s.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean).sort() : null
+      }
+      for (const key of ['residentTools', 'compactionTools']) {
+        const a = toolList(patchYml, key)
+        const b = toolList(agentYml, key)
+        ok(a !== null && b !== null, `${key} 在两份 preset 配置里都能解析到`)
+        if (a && b) {
+          eq(a.join(' '), b.join(' '), `${key} 两份 preset 配置的工具名集合一致`)
+          ok(a.every((n) => /^xinyue_/.test(n) || ['read', 'glob', 'grep'].includes(n)), `${key} 只含 xinyue_* 与基础只读工具`)
+        }
+      }
+    }
+  }
+
+  console.log('\n全部通过:' + passed + ' 项')
+} finally {
+  rmSync(home, { recursive: true, force: true })
+}

@@ -1,0 +1,152 @@
+{
+  "$comment": "《新月之书》章节地图(fkbook/OUTLINE.md 的机器可读版)。chapter.file 省略 fkbook/ 前缀,读取时由工具补全。",
+  "source": "新月之书 / fkbook-all-in-one (for-creators 分册)",
+  "files": 72,
+  "parts": [
+    {
+      "id": "start",
+      "title": "入门",
+      "intro": "引擎怎么装扩展包、最小扩展包长什么样、术语与规范。",
+      "chapters": [
+        { "file": "index.rst", "title": "写给拓展主", "keys": ["目录", "阅读路径"] },
+        { "file": "terminology.rst", "title": "扩展开发用语", "keys": ["术语", "叫法"] },
+        { "file": "anhe/00-prepare.rst", "title": "开发环境准备", "keys": ["packages/", "加载机制", "联机 git 同步"] },
+        { "file": "anhe/01-hello.rst", "title": "创建拓展包与新武将", "keys": ["Package:new", "General", "翻译表"] },
+        { "file": "create-fk-mod.rst", "title": "创建新月杀拓展", "keys": ["脚手架"] },
+        { "file": "create-resource-pak.rst", "title": "创建资源包", "keys": ["资源包"] }
+      ]
+    },
+    {
+      "id": "skill",
+      "title": "技能",
+      "intro": "技能骨架、触发技/主动技、次数与标签、距离、Exppattern。",
+      "chapters": [
+        { "file": "anhe/02-addskill.rst", "title": "添加技能", "keys": ["addSkills", "挂载已有技能"] },
+        { "file": "anhe/04-newskill.rst", "title": "创建一个新技能", "keys": ["fk.CreateSkill", "addEffect", "触发技"] },
+        { "file": "anhe/09-manage-skill.rst", "title": "技能管理", "keys": ["max_phase_use_time", "tags", "觉醒", "转换技", "延迟效果"] },
+        { "file": "rule/01-skill.rst", "title": "技能及其生效事件", "keys": ["生效时机", "can_trigger"] },
+        { "file": "rule/02-skel.rst", "title": "技能的次数限制", "keys": ["usedSkillTimes", "withinTimesLimit", "TurnEnd 重置"] },
+        { "file": "anhe/08-distance.rst", "title": "修改距离", "keys": ["distance", "correct_func", "攻击范围"] },
+        { "file": "anhe/12-arrange.rst", "title": "标记/技能名格式整理", "keys": ["命名", "重名"] },
+        { "file": "anhe/15-exppattern.rst", "title": "Exppattern", "keys": ["表达式", "^(3,5)", "扫牌"] },
+        { "file": "anhe/07-comment-log.rst", "title": "添加提示信息", "keys": ["fk.qInfo", "日志"] }
+      ]
+    },
+    {
+      "id": "rule",
+      "title": "规则与结算",
+      "intro": "事件栈与各类时机的官方口径;写触发技前必读。",
+      "chapters": [
+        { "file": "rule/03-event.rst", "title": "事件与时机", "keys": ["事件栈", "priority", "global", "target vs player"] },
+        { "file": "rule/06-use-response.rst", "title": "使用与打出", "keys": ["PreCardUse", "TargetSpecified", "响应", "打出"] },
+        { "file": "rule/07-hp.rst", "title": "体力值相关事件", "keys": ["Damage", "Damaged", "DetermineDamage", "PreHpLost"] },
+        { "file": "rule/08-death.rst", "title": "濒死与死亡", "keys": ["EnterDying", "AskForPeaches", "Death"] },
+        { "file": "rule/09-judge.rst", "title": "判定与拼点", "keys": ["StartJudge", "AskForRetrial", "Pindian"] },
+        { "file": "rule/04-movecard.rst", "title": "移动牌", "keys": ["BeforeCardsMove", "moveReason", "cancelMove"] },
+        { "file": "rule/10-property.rst", "title": "特殊状态改变", "keys": ["翻面", "横置", "标记"] },
+        { "file": "rule/05-gameflow.rst", "title": "游戏流程相关", "keys": ["回合", "阶段", "跳过", "额外回合"] },
+        { "file": "rule/faq.rst", "title": "常见村规结算", "keys": ["争议结算", "口径"] },
+        { "file": "anhe/10-change-hp.rst", "title": "体力变更", "keys": ["体力上限", "PreHpLost"] },
+        { "file": "anhe/11-change-game-process.rst", "title": "游戏进程", "keys": ["改流程", "胜负"] },
+        { "file": "anhe/14-eventstack.rst", "title": "事件栈解析", "keys": ["嵌套", "流程"] }
+      ]
+    },
+    {
+      "id": "asset",
+      "title": "美术 / 音频 / 界面",
+      "intro": "立绘、语音、皮肤、标记、QML 联动。",
+      "chapters": [
+        { "file": "anhe/03-makeimage.rst", "title": "武将美化", "keys": ["立绘", "尺寸", "缺图"] },
+        { "file": "anhe/05-audio.rst", "title": "添加音效", "keys": ["技能语音", "阵亡语音", "命名"] },
+        { "file": "misc/skin-package.rst", "title": "皮肤拓展", "keys": ["皮肤包"] },
+        { "file": "misc/mark-banner.rst", "title": "标记与 banner", "keys": ["mark", "角标", "banner"] },
+        { "file": "misc/lua-and-qml.rst", "title": "Lua 与 QML 联动", "keys": ["自定义界面", "特效"] }
+      ]
+    },
+    {
+      "id": "mode",
+      "title": "模式 / 配置 / AI",
+      "intro": "自定义玩法、模式参数、异步任务与 AI。",
+      "chapters": [
+        { "file": "anhe/16-extension.rst", "title": "拓展规范文档", "keys": ["目录", "素材规格", "extensionName", "GameMode", "GameLogic", "自定义势力"] },
+        { "file": "misc/mode-config.rst", "title": "游戏&子模式自定义 config", "keys": ["模式参数", "人数", "将池"] },
+        { "file": "misc/task.rst", "title": "关于 Task", "keys": ["异步任务", "排队"] },
+        { "file": "misc/ai-remake.rst", "title": "AI 方案设计", "keys": ["AI 决策"] }
+      ]
+    },
+    {
+      "id": "ship",
+      "title": "发布与调试",
+      "intro": "发布成 git 包、联机同步、出问题怎么查。",
+      "chapters": [
+        { "file": "anhe/06-git.rst", "title": "发布与更新自己的拓展", "keys": ["git", "联机同步", "Workspace is dirty"] },
+        { "file": "anhe/13-debug.rst", "title": "调试代码", "keys": ["日志", "报错定位"] }
+      ]
+    },
+    {
+      "id": "lua",
+      "title": "Lua 入门",
+      "intro": "零基础才需要;有其它语言基础看 20-table 与 21-func 即可。",
+      "chapters": [
+        { "file": "new-to-lua/15-hello-lua.rst", "title": "Lua：开始编程吧", "keys": ["环境", "hello"] },
+        { "file": "new-to-lua/16-var-and-type.rst", "title": "Lua：变量与数据类型", "keys": ["变量", "类型"] },
+        { "file": "new-to-lua/17-if.rst", "title": "Lua：if 语句", "keys": ["条件"] },
+        { "file": "new-to-lua/18-list.rst", "title": "Lua：列表", "keys": ["数组"] },
+        { "file": "new-to-lua/19-loop.rst", "title": "Lua：循环", "keys": ["for", "while"] },
+        { "file": "new-to-lua/20-table.rst", "title": "Lua：表", "keys": ["table", "字典"] },
+        { "file": "new-to-lua/21-func.rst", "title": "Lua：函数", "keys": ["function", "返回值"] }
+      ]
+    },
+    {
+      "id": "api",
+      "title": "API 参考(空壳,别读)",
+      "intro": "每个文件仅 100 字节的 autodoc 占位(.. lua:autoobject::),打包时未展开正文。查签名用 xinyue_api_lookup 或读 lua/ 源码。",
+      "chapters": [
+        { "file": "api-reference/core/index.rst", "title": "core 模块索引", "keys": ["占位"] },
+        { "file": "api-reference/core/player.rst", "title": "Class Player(占位)", "keys": ["占位"] },
+        { "file": "api-reference/core/card.rst", "title": "Class Card(占位)", "keys": ["占位"] },
+        { "file": "api-reference/core/skill.rst", "title": "Class Skill(占位)", "keys": ["占位"] },
+        { "file": "api-reference/core/package.rst", "title": "Class Package(占位)", "keys": ["占位"] },
+        { "file": "api-reference/core/general.rst", "title": "Class General(占位)", "keys": ["占位"] },
+        { "file": "api-reference/core/gamemode.rst", "title": "Class GameMode(占位)", "keys": ["占位"] },
+        { "file": "api-reference/core/engine.rst", "title": "Class Engine(占位)", "keys": ["占位"] },
+        { "file": "api-reference/core/abstractroom.rst", "title": "Class AbstractRoom(占位)", "keys": ["占位"] },
+        { "file": "api-reference/server/index.rst", "title": "server 模块索引", "keys": ["占位"] },
+        { "file": "api-reference/server/room.rst", "title": "Class Room(占位)", "keys": ["占位"] },
+        { "file": "api-reference/server/serverplayer.rst", "title": "Class ServerPlayer(占位)", "keys": ["占位"] },
+        { "file": "api-reference/server/gamelogic.rst", "title": "Class GameLogic(占位)", "keys": ["占位"] },
+        { "file": "api-reference/server/gameevent.rst", "title": "Class GameEvent(占位)", "keys": ["占位"] },
+        { "file": "api-reference/server/gameeventwrappers.rst", "title": "Class GameEventWrappers(占位)", "keys": ["占位"] },
+        { "file": "api-reference/server/request.rst", "title": "Class Request(占位)", "keys": ["占位"] }
+      ]
+    }
+  ],
+  "taskRoutes": [
+    { "want": "建一个能加载的扩展包", "read": ["anhe/01-hello.rst"], "then": ["anhe/16-extension.rst"] },
+    { "want": "写第一个自有技能", "read": ["anhe/04-newskill.rst"], "then": ["rule/01-skill.rst", "rule/03-event.rst"] },
+    { "want": "次数限制 / 觉醒 / 转换技", "read": ["anhe/09-manage-skill.rst"], "then": ["rule/02-skel.rst"] },
+    { "want": "改距离 / 攻击范围", "read": ["anhe/08-distance.rst"], "then": ["anhe/09-manage-skill.rst"] },
+    { "want": "用牌 / 响应 / 目标指定", "read": ["rule/06-use-response.rst"], "then": ["rule/03-event.rst"] },
+    { "want": "伤害 / 回血 / 体力上限", "read": ["rule/07-hp.rst"], "then": ["anhe/10-change-hp.rst"] },
+    { "want": "濒死 / 救援 / 死亡", "read": ["rule/08-death.rst"], "then": ["rule/07-hp.rst"] },
+    { "want": "判定 / 拼点", "read": ["rule/09-judge.rst"], "then": [] },
+    { "want": "移牌 / 弃牌 / 获得牌", "read": ["rule/04-movecard.rst"], "then": [] },
+    { "want": "翻面 / 横置 / 标记", "read": ["rule/10-property.rst", "misc/mark-banner.rst"], "then": [] },
+    { "want": "回合 / 阶段 / 游戏进程", "read": ["rule/05-gameflow.rst"], "then": ["anhe/11-change-game-process.rst"] },
+    { "want": "自定义玩法(模式)", "read": ["anhe/16-extension.rst"], "then": ["misc/mode-config.rst"] },
+    { "want": "发布 / 更新扩展包", "read": ["anhe/06-git.rst"], "then": [] },
+    { "want": "调试报错", "read": ["anhe/13-debug.rst"], "then": ["anhe/14-eventstack.rst"] }
+  ],
+  "verifiedNotes": [
+    "回调签名 (self, event, target, player, data);lua/core/skill_type/trigger.lua:28",
+    "发动频率写在 tags[1];addEffect 表里的 frequency 不被读取",
+    "语音一句一文件 audio/skill/<技能ID><序号>.mp3;audio_index 0=不播、缺省=随机;lua/core/skill.lua:21",
+    "fk.* 事件共 108 个,以 lua/core/events/*.lua 为准",
+    "Damage 承担者是来源,Damaged 承担者是受伤者;改伤害只写 DetermineDamage*",
+    "moveReason 必填;cancelMove 仅 BeforeCardsMove",
+    "is_delay_effect 默认自动发动",
+    "武将分类单位是 Package;General 无 category/tag 字段",
+    "extensionName 必须等于 packages/ 下目录名",
+    "自定义势力图尺寸:<代号>.png 75x75 / -magatama.png 22x27 / -back.png 175x233"
+  ]
+}

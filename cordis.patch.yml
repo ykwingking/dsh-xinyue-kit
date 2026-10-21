@@ -1,0 +1,158 @@
+# dsh-xinyue-kit bundle patch。
+# 通过 `dsh plugin --profile <name> add dsh-xinyue-kit` 安装时,本文件作为 bundle
+# 配置层自动插入。xinyueDir 是新月杀(FreeKill)游戏本体目录(同时含 packages/ 与 lua/ 的那层,例如 D:/games/FreeKill-release);
+# 不配置则为"仅生成模式"(工具可用,不能写文件,守卫不激活)。
+# 用户可在自己 profile 的 cordis.patch.yml 里用同 id 行覆盖整行 config:
+#   - id: xinyue-kit
+#     name: dsh-xinyue-kit
+#     config:
+#       xinyueDir: 'D:/games/freekill'
+- insert:
+    - id: xinyue-kit
+      name: dsh-xinyue-kit
+      config:
+        xinyueDir: ''
+
+    # ── 「新月杀开发模式」preset(DSH 0.1.7+ 声明式)─────────────────────────
+    # 0.1.7 起 agent preset 改为 YAML 声明(不再扫描 ~/.dsh/.agent-presets 目录),
+    # 本行随插件加载自动就位、随插件更新,无需安装/重装。
+    # 0.1.6 及以下没有 @deepseek-ai/dsh-agent-preset 包:disabled 探测表达式解析
+    # 不到该包即整行禁用,目录式 preset(install-preset 装的那份)继续生效,两套互不干扰。
+    # 插件自有脚本一律用「包名子路径」引用(经 exports ./presets/xinyue-dev/* 导出),
+    # 技能目录用 !!js 从 baseUrl 相对解析——任何安装形态(npm/link/路径)都可移植。
+    # 注意:persona 正文与 presets/xinyue-dev/agent.cordis.yml(0.1.6 目录式那份)
+    # 必须保持一致,两处由 test-preset 的同步用例把关,改任一处都要同步另一处。
+    - id: preset-xinyue-dev
+      name: '@deepseek-ai/dsh-agent-preset'
+      disabled: !!js (() => { try { process.getBuiltinModule('node:module').createRequire(String(baseUrl)).resolve('@deepseek-ai/dsh-agent-preset/package.json'); return false } catch { return true } })()
+      config:
+        id: xinyue-dev
+        name: 新月杀开发模式
+        description: 新月杀(FreeKill)Lua 扩展开发:十一个常驻工具 + 确认协议 + 区块化读写 + 玩法生成
+        order: 2
+        plugins:
+          - id: persona
+            name: '@deepseek-ai/dsh-persona'
+            config:
+              prefix: >-
+                你是新月杀(FreeKill)扩展开发工程师与工坊总指挥,只为本机游戏编写 Lua 包(武将技能、卡牌与玩法)。
+                流程:任何任务先输出
+                【需求理解确认】(逐技能/逐条规则:触发/频率/目标/数值/边界)并停下等用户确认,
+                有歧义用 ask_user_question 问清;注意 ask_user_question 的回答只消除歧义、
+                不算确认——歧义澄清后把最终确认单呈现给用户,仍须等到用户明确回复「确认」。
+                未确认禁止写代码(确认前的只读调研不受限:
+                可先 xinyue_search_reference 搜官方参考、xinyue_read_package 读已有包代码,再写确认单)。
+                查资料按这个顺序:要「该读哪一章」先 xinyue_doc_index(书有 72 篇,别猜目录名),
+                再用 xinyue_read_doc 读整节;查引擎符号(事件名/方法/常量/状态技字段)用 xinyue_api_lookup;
+                素材先 xinyue_match_assets 给出「请求→文件」映射表让用户确认,再 xinyue_copy_images / xinyue_copy_audio。
+                确认后逐技能实现,写完 xinyue_validate 校验通过后 xinyue_write_package 写入,
+                素材用 xinyue_copy_images 复制图片、xinyue_copy_audio 复制配音,
+                全部完成调 xinyue_skills_written 并提示测试。改已有包优先区块模式(区块读写;全文模式仅首写或未建索引的包,且必须带 editScope)。
+                完整规范见常驻知识文本,并用 skill_load 加载 xinyue-extension-dev 技能;
+                先想清方案再交付,交付前自查一遍。
+              complete: true
+              includeRuntimeContext: false
+
+          - id: instruction-hint
+            name: dsh-xinyue-kit/presets/xinyue-dev/instruction-hint.mjs
+            config:
+              promoteOn: assistant-message
+
+          - id: dev-tool-search
+            name: dsh-xinyue-kit/presets/xinyue-dev/dev-tool-search.mjs
+
+          - id: zero-tool-bootstrap
+            name: dsh-xinyue-kit/presets/xinyue-dev/zero-tool-bootstrap.mjs
+            config:
+              suppressedContextSources: [agent-instructions, skill-catalog]
+              residentTools: [xinyue_search_reference, xinyue_doc_index, xinyue_read_doc, xinyue_api_lookup, xinyue_validate, xinyue_read_package, xinyue_write_package, xinyue_skills_written, xinyue_match_assets, xinyue_copy_images, xinyue_copy_audio]
+              compactionTools: [read, glob, grep, xinyue_search_reference, xinyue_doc_index, xinyue_read_doc, xinyue_api_lookup, xinyue_validate, xinyue_read_package, xinyue_write_package, xinyue_skills_written, xinyue_match_assets, xinyue_copy_images, xinyue_copy_audio]
+
+          - id: anchor-turn
+            name: dsh-xinyue-kit/presets/xinyue-dev/anchor-turn.mjs
+            config:
+              text: 这一轮是新月杀开发模式的锚定轮,工具尚未开放;从下一轮起工具开放。
+
+          - id: tool-bash
+            name: '@deepseek-ai/dsh-tool-bash'
+            disabled: !!js process.platform === 'win32'
+
+          - id: tool-pwsh
+            name: '@deepseek-ai/dsh-tool-pwsh'
+            disabled: !!js process.platform !== 'win32'
+
+          - id: custom-bash
+            name: dsh-xinyue-kit/presets/xinyue-dev/custom-bash.mjs
+            disabled: !!js process.platform !== 'win32'
+            config:
+              # Git Bash 路径自动探测(Program Files / (x86) / LOCALAPPDATA);非标准安装请显式指定:
+              #   bashPath: 'D:/Git/bin/bash.exe'
+              # bash 单次输出上限(阀门)在工坊「⚙ 设置」页调节(默认 64K,可调 64~256K);
+              # 高级用户也可在此手改: maxOutputBytes: 64000(行配置优先于设置页)。
+
+          - id: tool-fs
+            name: '@deepseek-ai/dsh-tool-fs'
+
+          - id: tool-fs-search
+            name: '@deepseek-ai/dsh-tool-fs-search'
+            config:
+              sampleOverCapGlobResults: false
+
+          - id: bootstrap-filesystem
+            name: cordis:group
+            group: true
+            isolate:
+              fs: true
+            config:
+              - id: fs-local
+                name: '@deepseek-ai/dsh-fs-local'
+                config:
+                  cwd: !!js process.env.DSH_CWD ?? process.cwd()
+
+              - id: str-replace-editor
+                name: '@deepseek-ai/dsh-tool-str-replace-editor'
+                config:
+                  maxOutputChars: 16000
+
+          - id: skill-filesystem
+            name: '@deepseek-ai/dsh-skill-filesystem'
+            config:
+              customSkillDirs:
+                - !!js process.getBuiltinModule('node:path').join(process.getBuiltinModule('node:path').dirname(process.getBuiltinModule('node:module').createRequire(baseUrl).resolve('dsh-xinyue-kit/package.json')), 'presets', 'xinyue-dev', 'skills')
+
+          - id: skill-search
+            name: dsh-xinyue-kit/presets/xinyue-dev/skill-search.mjs
+
+          - id: compaction
+            name: cordis:group
+            group: true
+            isolate:
+              compaction: true
+              toolResultPruner: true
+            config:
+              - id: compaction-basic
+                name: '@deepseek-ai/dsh-compaction-basic'
+
+              - id: command-compact
+                name: '@deepseek-ai/dsh-command-compact'
+
+              - id: tool-result-pruner
+                name: '@deepseek-ai/dsh-compaction-tool-result-pruner'
+                config:
+                  thresholdChars: 8192
+                  headChars: 4096
+                  tailChars: 1024
+
+          - id: tool-ask-user
+            name: '@deepseek-ai/dsh-tool-ask-user'
+
+          - id: tool-todo
+            name: '@deepseek-ai/dsh-tool-todo'
+            config:
+              allowParallelInProgress: true
+
+          - id: tool-web
+            name: '@deepseek-ai/dsh-tool-web'
+            config:
+              fetch: false
+              searchTimeoutMs: 60000
