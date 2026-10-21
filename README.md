@@ -1,11 +1,12 @@
 # dsh-xinyue-kit
 
 新月杀(FreeKill)扩展开发工坊,一个 DeepSeek Harness 插件。
-基于https://github.com/qtaik/dsh-noname-kit修改
+感谢开源项目https://github.com/qtaik/dsh-noname-kit
 
 让 AI 按规范写新月杀(FreeKill)的 Lua 扩展(武将技能、卡牌与玩法):规范注入、官方源码搜索、
 静态校验、任务管理都有插件兜底;游戏扩展目录只认专用写入通道,AI 抄错或删错
 代码会被工具层拦下,覆盖前自动备份。
+<img width="1920" height="1140" alt="image" src="https://github.com/user-attachments/assets/76b74516-c991-4528-b10b-2cf686d15c90" />
 
 ![工坊:任务表单与任务列表](docs/screenshots/workshop.png)
 
