@@ -1,6 +1,6 @@
 # dsh-xinyue-kit
 
-新月杀(FreeKill)扩展开发工坊,一个 DeepSeek Harness 插件。
+新月杀(FreeKill)扩展开发工坊,一个 DeepSeek Harness 插件。AI生成，小bug无法避免，请让ai解决，抱歉。
 感谢开源项目https://github.com/qtaik/dsh-noname-kit
 
 【注意必读】
