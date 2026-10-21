@@ -8,9 +8,6 @@
 代码会被工具层拦下,覆盖前自动备份。
 <img width="1920" height="1140" alt="image" src="https://github.com/user-attachments/assets/76b74516-c991-4528-b10b-2cf686d15c90" />
 
-![工坊:任务表单与任务列表](docs/screenshots/workshop.png)
-
-![历史页:扩展总览、备份回滚与注意点清单](docs/screenshots/history.png)
 
 ## 安装
 
